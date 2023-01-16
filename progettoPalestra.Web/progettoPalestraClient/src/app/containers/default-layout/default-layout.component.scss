@@ -1,0 +1,31 @@
+:host {
+    #select-company ::ng-deep {
+        width: 25em;
+        margin-right: 25px;
+
+        .mat-form-field-infix {
+            padding: 0 !important;
+        }
+    } 
+} 
+
+.notification-dropdown {
+    .badge {
+        background-color: red;
+        color: white;
+        position: absolute;
+        font-size: 12px;
+        right: 0px;
+    }
+}
+
+/*RISOLVE IL PROBLEMA DELLE LOOKUP TAGLIATE ALL'INTERNO DELLA CARD O DELLA MODALE*/
+::ng-deep {
+  .mat-dialog-container {
+    overflow: visible !important;
+  }
+
+  .modal-filter-container {
+    overflow: visible !important;
+  }
+}

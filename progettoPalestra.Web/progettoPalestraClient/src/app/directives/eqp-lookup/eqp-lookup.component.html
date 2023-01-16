@@ -1,0 +1,20 @@
+<!-- CASO IN CUI VIENE PASSATO IL FormControlName e il FormGroup -->
+<form *ngIf="formGroupInput && formControlNameInput" [formGroup]="formGroupInput">
+  <ng-select class="mat-form-field" [appendTo]="appendToInput" [formControlName]="formControlNameInput" #ngselect (blur)="ngselect.close()"
+    (change)="onChangeSelect($event)" [items]="items" placeholder="{{placeholder}}" [(ngModel)]="ngModelInput"
+    [multiple]="isMultiple" [notFoundText]="notFoundText" [searchable]="isSearchable" [virtualScroll]="isVirtualScroll"
+    [readonly]="isReadonly" [bindLabel]="'Label'" bindValue="{{bindCompleteObject == true ? null : 'ID'}}" [required]="isRequired" [disabled]="isDisabled">
+  </ng-select>
+</form>
+
+<ng-select class="mat-form-field" *ngIf="!formGroupInput && !formControlNameInput" (change)="onChangeSelect($event)"
+  [ngModelOptions]="{standalone: true}" [(ngModel)]="ngModelInput" #ngselect (blur)="ngselect.close()" [items]="items"
+  placeholder="{{placeholder}}" [multiple]="isMultiple" [notFoundText]="notFoundText"
+  [searchable]="isSearchable" [virtualScroll]="isVirtualScroll" bindValue="{{bindCompleteObject == true ? null : 'ID'}}" [readonly]="isReadonly" [bindLabel]="'Label'"
+  [required]="isRequired" [appendTo]="appendToInput" [disabled]="isDisabled">
+</ng-select>
+
+<ng-template #dialogDynamic>
+  <ng-template appDynamicLoader [data]="genericAddComponent">
+  </ng-template>
+</ng-template>

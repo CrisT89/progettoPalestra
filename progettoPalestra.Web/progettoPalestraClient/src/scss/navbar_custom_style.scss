@@ -1,0 +1,73 @@
+  
+// Definisce lo stile di ogni elemento della sidebar (icona + voce di menù)
+app-sidebar-nav-link-content {
+    color: $navbar-gray-text !important;
+ }
+   
+   /* SIDEBAR */
+   .sidebar .nav-link:hover {
+     background: $mat-primary-color;
+     color: $navbar-white-text !important;
+     .nav-icon {
+       color: $navbar-white-text !important;
+     }
+     app-sidebar-nav-link-content {
+         color: $navbar-white-text !important;
+      }
+   }
+   
+   .sidebar .nav-link.active {
+     color: $navbar-white-text !important;
+     background-color: $mat-primary-color !important;
+     .nav-icon {
+       color: $navbar-white-text !important;
+     }
+     app-sidebar-nav-link-content {
+         color: $navbar-white-text !important;
+      }
+   }
+   
+   .sidebar .nav-link {
+     color: $navbar-gray-text !important;
+   }
+   
+   a.nav-link .nav-dropdown-toggle {
+     color: $navbar-gray-text !important;
+   }
+   
+   .sidebar .nav-item {
+     color: $navbar-gray-text !important;
+   }
+ 
+   
+ //   Nascondo le icone delle sottovoci della sidebar
+ //   altrimenti crea disallineamento per le voci che vanno a capo
+   .sidebar .nav-dropdown-items .nav-item .nav-link .nav-icon {
+     display: none;
+   }
+   
+ //   Aggiungo padding alle sottovoci della sidebar per l'indentazione
+   .sidebar .nav-dropdown-items .nav-item .nav-link {
+     padding-left: 45px;
+   }
+ 
+ //   Ridefinizione icona "minimizer" navbar laterale
+   .sidebar .sidebar-minimizer::before {
+     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 14'%3E%3Cpath fill='%23fff' d='M9.148 2.352l-4.148 4.148 4.148 4.148q0.148 0.148 0.148 0.352t-0.148 0.352l-1.297 1.297q-0.148 0.148-0.352 0.148t-0.352-0.148l-5.797-5.797q-0.148-0.148-0.148-0.352t0.148-0.352l5.797-5.797q0.148-0.148 0.352-0.148t0.352 0.148l1.297 1.297q0.148 0.148 0.148 0.352t-0.148 0.352z'/%3E%3C/svg%3E")
+   }
+ 
+   .sidebar-minimized .sidebar .nav-item:hover > .nav-link {
+     background-color: $mat-primary-color !important;
+   }
+   
+   .sidebar-minimized .sidebar .nav-link:hover {
+     background-color: $mat-primary-color !important;
+   }
+   
+   .sidebar-minimized .sidebar .nav > .nav-dropdown:hover {
+     background-color: $mat-primary-color !important;
+   }
+
+   .app-header .navbar-toggler-icon {
+     background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='%23fff' stroke-width='2.25' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+   }

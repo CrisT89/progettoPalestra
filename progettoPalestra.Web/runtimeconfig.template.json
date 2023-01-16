@@ -1,0 +1,8 @@
+{
+  "configProperties": {
+    "ConnectionConfig": {
+      "MySQL": "",
+      "MSSQL": "Data Source = (LocalDb)\\MSSQLLocalDb;Initial Catalog=progettoPalestra; Integrated Security = true; MultipleActiveResultSets=true",
+    }
+  }
+}
