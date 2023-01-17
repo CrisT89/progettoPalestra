@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace progettoPalestra.Core.DAL.Models.Data
 {
-    public class Article : IBaseEntity
+    public class Article : IBaseEntity, IAuditEntity<int>
     {
         public int ID { get; set; }
         public string Code { get; set; }
@@ -26,5 +26,11 @@ namespace progettoPalestra.Core.DAL.Models.Data
         public Category Category { get; set; }
         public bool? Suspended { get; set; }
         public bool? InEvidence { get; set; }
+
+        //Sezione Audit
+        public int FK_InsertUser { get; set; }
+        public DateTime InsertDate { get; set; }
+        public int FK_UpdateUser { get; set; }
+        public DateTime? UpdateDate { get; set; }
     }
 }
