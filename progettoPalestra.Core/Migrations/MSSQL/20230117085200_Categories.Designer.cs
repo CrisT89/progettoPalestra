@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using progettoPalestra.Core.DAL.Context;
 
@@ -11,9 +12,10 @@ using progettoPalestra.Core.DAL.Context;
 namespace progettoPalestra.Core.Migrations.MSSQL
 {
     [DbContext(typeof(MSSQL_DbContext))]
-    partial class MSSQL_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230117085200_Categories")]
+    partial class Categories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,50 +27,51 @@ namespace progettoPalestra.Core.Migrations.MSSQL
             modelBuilder.Entity("progettoPalestra.Core.DAL.Models.Data.Article", b =>
                 {
                     b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int?>("CategoryID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal?>("DiscountPrice")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
+                    b.Property<decimal>("DiscountPrice")
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime?>("EndOfValidity")
+                    b.Property<DateTime>("EndOfValidity")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("FK_Category")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("InEvidence")
+                    b.Property<bool>("InEvidence")
                         .HasColumnType("bit");
 
-                    b.Property<decimal?>("Iva")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
+                    b.Property<decimal>("Iva")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasPrecision(10, 2)
-                        .HasColumnType("decimal(10,2)");
+                        .HasColumnType("decimal(18,2)");
 
-                    b.Property<bool?>("Suspended")
+                    b.Property<bool>("Suspended")
                         .HasColumnType("bit");
 
                     b.HasKey("ID");
 
-                    b.HasIndex("Code")
-                        .IsUnique();
+                    b.HasIndex("CategoryID");
 
-                    b.ToTable("Articles");
+                    b.ToTable("Article");
                 });
 
             modelBuilder.Entity("progettoPalestra.Core.DAL.Models.Data.Category", b =>
@@ -206,9 +209,7 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                 {
                     b.HasOne("progettoPalestra.Core.DAL.Models.Data.Category", "Category")
                         .WithMany("Articles")
-                        .HasForeignKey("ID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("CategoryID");
 
                     b.Navigation("Category");
                 });

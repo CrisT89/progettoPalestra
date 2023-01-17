@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using progettoPalestra.Core.DAL.Models.Data;
+using progettoPalestra.Core.DAL.Context.EntityConfigurations.DataConfigurations;
 
 namespace progettoPalestra.Core.DAL.Context
 {
@@ -61,6 +63,8 @@ namespace progettoPalestra.Core.DAL.Context
         #region DBSET
         // <ewz:dbset>
         public DbSet<User> Users { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Article> Articles { get; set; }
 
         #region NotificationCenter
         public DbSet<Notification> Notifications { get; set; }
@@ -121,7 +125,8 @@ namespace progettoPalestra.Core.DAL.Context
         {
 
             modelBuilder.ApplyConfiguration(new UserConfigurations());
-
+            modelBuilder.ApplyConfiguration(new CategoryConfigurations());
+            modelBuilder.ApplyConfiguration(new ArticleConfigurations());
             #region FluentAPI per entità NotificationCenter
             modelBuilder.ApplyConfiguration(new NotificationConfigurations());
             modelBuilder.ApplyConfiguration(new NotificationDetailConfigurations());

@@ -1,4 +1,5 @@
 ﻿using EQP.EFRepository.Core.Interface;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,22 +13,24 @@ namespace progettoPalestra.Core.DAL.Models.Data
     public class Article : IBaseEntity
     {
         [Key]
-        public int ID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public int FK_Category { get; set; }
+        public int ID { get; set; }
+        [Required]
+        public string Code { get; set; }
         [Required]
         public string Name { get; set; }
         [Required]
         public string Description { get; set; }
         [Required]
         public decimal Price { get; set; }
-        public decimal DiscountPrice { get; set; }
-        public decimal Iva { get; set; }
+        public decimal? DiscountPrice { get; set; }
+        [Range(0.00,100.00)]
+        public decimal? Iva { get; set; }
         public string ImagePath { get; set; }
         [NotMapped]
         public byte[] ImageData { get; set; }
-        public DateTime EndOfValidity { get; set; }
+        public DateTime? EndOfValidity { get; set; }
         public Category Category { get; set; }
-        public bool Suspended { get; set; }
-        public bool InEvidence { get; set; }
+        public bool? Suspended { get; set; }
+        public bool? InEvidence { get; set; }
     }
 }
