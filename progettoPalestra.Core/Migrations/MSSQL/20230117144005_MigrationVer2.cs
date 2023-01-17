@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace progettoPalestra.Core.Migrations.MSSQL
 {
-    public partial class Categories : Migration
+    public partial class MigrationVer2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,37 +25,37 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                 });
 
             migrationBuilder.CreateTable(
-                name: "Article",
+                name: "Articles",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FK_Category = table.Column<int>(type: "int", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    DiscountPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Iva = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: false),
+                    DiscountPrice = table.Column<decimal>(type: "decimal(10,2)", precision: 10, scale: 2, nullable: true),
+                    Iva = table.Column<decimal>(type: "decimal(5,2)", precision: 5, scale: 2, nullable: true),
                     ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    EndOfValidity = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CategoryID = table.Column<int>(type: "int", nullable: true),
-                    Suspended = table.Column<bool>(type: "bit", nullable: false),
-                    InEvidence = table.Column<bool>(type: "bit", nullable: false)
+                    EndOfValidity = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Suspended = table.Column<bool>(type: "bit", nullable: true),
+                    InEvidence = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Article", x => x.ID);
+                    table.PrimaryKey("PK_Articles", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Article_Categories_CategoryID",
-                        column: x => x.CategoryID,
+                        name: "FK_Articles_Categories_ID",
+                        column: x => x.ID,
                         principalTable: "Categories",
-                        principalColumn: "ID");
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Article_CategoryID",
-                table: "Article",
-                column: "CategoryID");
+                name: "IX_Articles_Code",
+                table: "Articles",
+                column: "Code",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Categories_Name",
@@ -67,7 +67,7 @@ namespace progettoPalestra.Core.Migrations.MSSQL
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Article");
+                name: "Articles");
 
             migrationBuilder.DropTable(
                 name: "Categories");

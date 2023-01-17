@@ -12,7 +12,7 @@ using progettoPalestra.Core.DAL.Context;
 namespace progettoPalestra.Core.Migrations.MSSQL
 {
     [DbContext(typeof(MSSQL_DbContext))]
-    [Migration("20230117140455_MigrationVer2")]
+    [Migration("20230117144005_MigrationVer2")]
     partial class MigrationVer2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
