@@ -10,9 +10,7 @@ namespace progettoPalestra.Core.DAL.Models.Data
 {
     public class Category : IBaseEntity
     {
-        [Key]
         public int ID { get; set; }
-        [Required]
         public string Name { get; set; }
         public string Description { get; set; }
         public string Label { get; set; }

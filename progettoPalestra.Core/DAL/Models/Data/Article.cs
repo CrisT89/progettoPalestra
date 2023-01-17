@@ -12,21 +12,15 @@ namespace progettoPalestra.Core.DAL.Models.Data
 {
     public class Article : IBaseEntity
     {
-        [Key]
         public int ID { get; set; }
-        [Required]
         public string Code { get; set; }
-        [Required]
         public string Name { get; set; }
-        [Required]
         public string Description { get; set; }
-        [Required]
         public decimal Price { get; set; }
         public decimal? DiscountPrice { get; set; }
         [Range(0.00,100.00)]
         public decimal? Iva { get; set; }
         public string ImagePath { get; set; }
-        [NotMapped]
         public byte[] ImageData { get; set; }
         public DateTime? EndOfValidity { get; set; }
         public Category Category { get; set; }

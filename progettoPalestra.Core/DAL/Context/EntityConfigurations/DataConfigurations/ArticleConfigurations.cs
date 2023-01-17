@@ -29,8 +29,10 @@ namespace progettoPalestra.Core.DAL.Context.EntityConfigurations.DataConfigurati
             builder.Property(a => a.DiscountPrice)
                 .HasPrecision(10, 2);
 
-            builder.Property(a=>a.Iva)
+            builder.Property(a => a.Iva)
                 .HasPrecision(5, 2);
+
+            builder.Ignore(a => a.ImageData);
 
             //Code unico
             builder.HasIndex(a => a.Code)
