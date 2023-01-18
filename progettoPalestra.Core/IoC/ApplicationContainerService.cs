@@ -10,6 +10,7 @@ using HSE.Core.HelperService;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using progettoPalestra.Core.EntityService.DataService;
 
 namespace progettoPalestra.Core.IoC
 {
@@ -88,6 +89,8 @@ namespace progettoPalestra.Core.IoC
             #region Configurazione Servizi per le entità
             // <ewz:servicesRegistering>
             builder.RegisterType<UserService>().AsSelf();
+            builder.RegisterType<CategoryService>().AsSelf();
+            builder.RegisterType<ArticleService>().AsSelf();
 
             #region Servizi per entità NotificationCenter
             builder.RegisterType<NotificationService>().AsSelf();
