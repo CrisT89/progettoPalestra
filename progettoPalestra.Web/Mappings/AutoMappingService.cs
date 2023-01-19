@@ -13,6 +13,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using progettoPalestra.Core.DAL.Models.Data;
+using progettoPalestra.Web.Mappings.ModelsDTO.DataDTO;
 
 namespace progettoPalestra.Web.Mappings
 {
@@ -95,6 +97,10 @@ namespace progettoPalestra.Web.Mappings
                         FullObject = _lookupStringService.NormalizeFullObject(model)
                     };
                 });
+
+                //configurazione mapping Data.Model -> Data.DTO
+                cfg.CreateMap<Category, CategoryDTO>().ReverseMap();
+                cfg.CreateMap<Article, ArticleDTO>().ReverseMap();
 
                 #region Mapping oggetti NotificationCenter
                 cfg.CreateMap<Notification, NotificationDTO>();

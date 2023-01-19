@@ -17,7 +17,7 @@ namespace progettoPalestra.Core.Migrations.MSSQL
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -94,15 +94,6 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FK_InsertUser")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FK_UpdateUser")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Label")
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
@@ -111,9 +102,6 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("ID");
 
