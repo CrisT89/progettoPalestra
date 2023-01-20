@@ -12,14 +12,14 @@ using progettoPalestra.Core.DAL.Context;
 namespace progettoPalestra.Core.Migrations.MSSQL
 {
     [DbContext(typeof(MSSQL_DbContext))]
-    [Migration("20230117144005_MigrationVer2")]
-    partial class MigrationVer2
+    [Migration("20230120160205_MigrationVer3.2")]
+    partial class MigrationVer32
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.5")
+                .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -27,7 +27,10 @@ namespace progettoPalestra.Core.Migrations.MSSQL
             modelBuilder.Entity("progettoPalestra.Core.DAL.Models.Data.Article", b =>
                 {
                     b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -44,11 +47,23 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                     b.Property<DateTime?>("EndOfValidity")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("FK_Category")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FK_InsertUser")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FK_UpdateUser")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("InEvidence")
                         .HasColumnType("bit");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<decimal?>("Iva")
                         .HasPrecision(5, 2)
@@ -65,10 +80,15 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                     b.Property<bool?>("Suspended")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("ID");
 
                     b.HasIndex("Code")
                         .IsUnique();
+
+                    b.HasIndex("FK_Category");
 
                     b.ToTable("Articles");
                 });
@@ -84,6 +104,15 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FK_InsertUser")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FK_UpdateUser")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Label")
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
@@ -92,6 +121,9 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ID");
 
@@ -208,7 +240,7 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                 {
                     b.HasOne("progettoPalestra.Core.DAL.Models.Data.Category", "Category")
                         .WithMany("Articles")
-                        .HasForeignKey("ID")
+                        .HasForeignKey("FK_Category")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

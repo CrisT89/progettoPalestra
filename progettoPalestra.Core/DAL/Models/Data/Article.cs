@@ -24,6 +24,7 @@ namespace progettoPalestra.Core.DAL.Models.Data
         public byte[] ImageData { get; set; }
         public DateTime? EndOfValidity { get; set; }
         public Category Category { get; set; }
+        public int FK_Category { get; set; }
         public bool? Suspended { get; set; }
         public bool? InEvidence { get; set; }
 

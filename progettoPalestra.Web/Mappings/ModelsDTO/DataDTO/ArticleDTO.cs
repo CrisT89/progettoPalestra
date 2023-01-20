@@ -18,6 +18,7 @@ namespace progettoPalestra.Web.Mappings.ModelsDTO.DataDTO
         public byte[] ImageData { get; set; }
         public DateTime? EndOfValidity { get; set; }
         public CategoryDTO Category { get; set; }
+        public int FK_Category { get; set; }
         public bool? Suspended { get; set; }
         public bool? InEvidence { get; set; }
     }

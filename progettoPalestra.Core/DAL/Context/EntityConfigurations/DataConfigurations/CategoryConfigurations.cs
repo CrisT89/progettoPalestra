@@ -27,7 +27,7 @@ namespace progettoPalestra.Core.DAL.Context.EntityConfigurations.DataConfigurati
             //relazione 1 a N
             builder.HasMany<Article>(c => c.Articles)
                 .WithOne(a => a.Category)
-                .HasForeignKey(a => a.ID);
+                .HasForeignKey(a => a.FK_Category);
         }
     }
 }

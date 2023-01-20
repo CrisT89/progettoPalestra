@@ -25,7 +25,10 @@ namespace progettoPalestra.Core.Migrations.MSSQL
             modelBuilder.Entity("progettoPalestra.Core.DAL.Models.Data.Article", b =>
                 {
                     b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -41,6 +44,9 @@ namespace progettoPalestra.Core.Migrations.MSSQL
 
                     b.Property<DateTime?>("EndOfValidity")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("FK_Category")
+                        .HasColumnType("int");
 
                     b.Property<int>("FK_InsertUser")
                         .HasColumnType("int");
@@ -80,6 +86,8 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                     b.HasIndex("Code")
                         .IsUnique();
 
+                    b.HasIndex("FK_Category");
+
                     b.ToTable("Articles");
                 });
 
@@ -94,6 +102,15 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("FK_InsertUser")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FK_UpdateUser")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("InsertDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Label")
                         .HasMaxLength(40)
                         .HasColumnType("nvarchar(40)");
@@ -102,6 +119,9 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ID");
 
@@ -218,7 +238,7 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                 {
                     b.HasOne("progettoPalestra.Core.DAL.Models.Data.Category", "Category")
                         .WithMany("Articles")
-                        .HasForeignKey("ID")
+                        .HasForeignKey("FK_Category")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
