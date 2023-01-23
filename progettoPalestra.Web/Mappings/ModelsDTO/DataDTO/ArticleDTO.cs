@@ -15,7 +15,7 @@ namespace progettoPalestra.Web.Mappings.ModelsDTO.DataDTO
         [Range(0.00, 100.00)]
         public decimal? Iva { get; set; }
         public string ImagePath { get; set; }
-        public byte[] ImageData { get; set; }
+        public string ImageData { get; set; }
         public DateTime? EndOfValidity { get; set; }
         public CategoryDTO Category { get; set; }
         public int FK_Category { get; set; }
