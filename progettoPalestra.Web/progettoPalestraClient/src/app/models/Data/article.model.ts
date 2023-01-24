@@ -1,8 +1,7 @@
+import { CategoryDTO } from "./category.model";
 /* 
 Modello per l'articolo
 */
-
-import { CategoryDTO } from "./category.model";
 
 export class ArticleDTO {
     ID: number;
