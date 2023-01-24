@@ -52,6 +52,8 @@ import { AvatarModule } from 'ngx-avatar';
 import { ToastrModule } from 'ngx-toastr';
 import { ListNotificationsComponent } from './components/notifications/list-notifications/list-notifications.component';
 import { PendingChangesGuard } from './helpers/componentDeactivate.guard';
+import { ListCategoryComponent } from './components/category/list-category/list-category.component';
+import { AddCategoryComponent } from './components/category/add-category/add-category.component';
 registerLocaleData(localeIt, 'it-IT');
 
 @NgModule({
@@ -85,7 +87,9 @@ registerLocaleData(localeIt, 'it-IT');
     ProfileComponent,
     ChangePasswordComponent,
     TestComponent,
-    ListNotificationsComponent
+    ListNotificationsComponent,
+    ListCategoryComponent,
+    AddCategoryComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
