@@ -9,8 +9,8 @@ export class CategoryService {
 
     constructor(private http: HttpClient){}
 
-    getAllCategories(): Observable<CategoryDTO> {
-        return this.http.get<CategoryDTO>(environment.apiFullUrl + '/category/GetAllCategories');
+    getAllCategories(): Observable<Array<CategoryDTO>> {
+        return this.http.get<Array<CategoryDTO>>(environment.apiFullUrl + '/category/GetAllCategories');
     }
 
     getById(id: number): Observable<CategoryDTO> {

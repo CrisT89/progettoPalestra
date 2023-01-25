@@ -14,6 +14,7 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { AuthGuard } from './helpers/auth.guard';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ListNotificationsComponent } from './components/notifications/list-notifications/list-notifications.component';
+import { ListCategoryComponent } from './components/category/list-category/list-category.component';
 
 export const routes: Routes = [
   {
@@ -86,6 +87,13 @@ export const routes: Routes = [
         component: TestComponent,
         data: {
           breadcrumbs: 'Test'
+        }
+      },
+      {
+        path: 'categories',
+        component: ListCategoryComponent,
+        data: {
+          breadcrumbs: 'Categories'
         }
       }
     ]

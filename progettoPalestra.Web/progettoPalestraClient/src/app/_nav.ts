@@ -36,5 +36,10 @@ export const navItems: INavData[] = [
     url: 'test',
     icon: 'fa fa-pie-chart',
   },
+  {
+    name: 'Categories',
+    url: 'categories',
+    icon: 'fa fa-tags',
+  },
 
 ];
