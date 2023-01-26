@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigColumn, TypeColumn } from '@eqproject/eqp-table';
 import { CategoryDTO } from '../../../models/Data/category.model';
 import { CategoryService } from '../../../services/DataService/category.service';
@@ -11,7 +12,11 @@ import { DialogService } from '../../../services/dialog.service';
 })
 export class ListCategoryComponent implements OnInit {
 
-  constructor(private categoryService: CategoryService) { 
+  constructor(
+    private categoryService: CategoryService, 
+    private router: Router,
+    private route: ActivatedRoute) 
+    { 
     this.configureColumns();
   }
 
@@ -37,18 +42,23 @@ export class ListCategoryComponent implements OnInit {
       key: "action", display: "",
       type: TypeColumn.MenuAction, buttonMenuIcon: "more_vert", styles: { flex: "0 0 6%" },
       actions: [
-      { name: "Modifica", icon: "create", fn: (element, index, col) => this.functionName(element, index, col), disabled: false, hidden: false },
+      { name: "Modifica", icon: "create", fn: (element, index, col) => this.editCategory(element, index, col), disabled: false, hidden: false },
       { name: "Elimina", icon: "delete", fn: (element, index, col) => this.functionName(element, index, col), disabled: true, hidden: false },
       ],
     },
     ];
   }
 
+  editCategory(el, ind, col) {
+    console.log("Indirizzamento verso componente add-category in edit-mode!!!");
+    console.log(this.categories[el]);
+  }
+  
   functionName(el, ind, col) {
 
   }
-
   onAddCategory() {
     console.log("Indirizzamento verso componente add-category!!!");
+    this.router.navigate(['/newcategory']);
   }
 }

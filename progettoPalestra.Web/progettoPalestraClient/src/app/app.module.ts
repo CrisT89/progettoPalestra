@@ -42,6 +42,8 @@ import { ProfileComponent } from './components/profile/profile.component';
 import { SharedModule } from '../modules/shared.module';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { TestComponent } from './components/test-component/test-component';
+import { ListCategoryComponent } from './components/category/list-category/list-category.component';
+import { AddCategoryComponent } from './components/category/add-category/add-category.component';
 
 // Import per la localizzazione
 import { LOCALE_ID } from '@angular/core';
@@ -52,8 +54,7 @@ import { AvatarModule } from 'ngx-avatar';
 import { ToastrModule } from 'ngx-toastr';
 import { ListNotificationsComponent } from './components/notifications/list-notifications/list-notifications.component';
 import { PendingChangesGuard } from './helpers/componentDeactivate.guard';
-import { ListCategoryComponent } from './components/category/list-category/list-category.component';
-import { AddCategoryComponent } from './components/category/add-category/add-category.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 registerLocaleData(localeIt, 'it-IT');
 
 @NgModule({
@@ -75,6 +76,8 @@ registerLocaleData(localeIt, 'it-IT');
     PpBreadcrumbsModule,
     AvatarModule,
     ToastrModule.forRoot(),
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [
     AppComponent,

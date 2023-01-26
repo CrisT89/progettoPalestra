@@ -15,6 +15,7 @@ import { AuthGuard } from './helpers/auth.guard';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 import { ListNotificationsComponent } from './components/notifications/list-notifications/list-notifications.component';
 import { ListCategoryComponent } from './components/category/list-category/list-category.component';
+import { AddCategoryComponent } from './components/category/add-category/add-category.component';
 
 export const routes: Routes = [
   {
@@ -94,6 +95,20 @@ export const routes: Routes = [
         component: ListCategoryComponent,
         data: {
           breadcrumbs: 'Categories'
+        }
+      },
+      {
+        path: 'newcategory',
+        component: AddCategoryComponent,
+        data: {
+          breadcrumbs: 'New Category'
+        }
+      },
+      {
+        path: 'newcategory/:id',
+        component: AddCategoryComponent,
+        data: {
+          breadcrumbs: 'Edit Category'
         }
       }
     ]
