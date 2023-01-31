@@ -40,8 +40,8 @@ export class AddCategoryComponent implements OnInit {
 
   createForm() {
     this.categoryForm = this.formBuilder.group({
-      'Nome': [this.category.Name, [Validators.required]],
-      'Label': [this.category.Label, []],
+      'Nome': [this.category.Name, [Validators.required, Validators.maxLength(100)]],
+      'Label': [this.category.Label, [Validators.maxLength(40)]],
       'Descrizione': [this.category.Description, []],
     });
   }

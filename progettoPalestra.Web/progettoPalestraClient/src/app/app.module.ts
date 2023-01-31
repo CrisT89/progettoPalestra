@@ -55,6 +55,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { ListNotificationsComponent } from './components/notifications/list-notifications/list-notifications.component';
 import { PendingChangesGuard } from './helpers/componentDeactivate.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListArticleComponent } from './components/article/list-article/list-article.component';
+import { AddArticleComponent } from './components/article/add-article/add-article.component';
 registerLocaleData(localeIt, 'it-IT');
 
 @NgModule({
@@ -92,7 +94,9 @@ registerLocaleData(localeIt, 'it-IT');
     TestComponent,
     ListNotificationsComponent,
     ListCategoryComponent,
-    AddCategoryComponent
+    AddCategoryComponent,
+    ListArticleComponent,
+    AddArticleComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
