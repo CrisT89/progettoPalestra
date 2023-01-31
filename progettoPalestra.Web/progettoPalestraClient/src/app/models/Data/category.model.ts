@@ -10,4 +10,6 @@ export class CategoryDTO {
     Label: string;
 
     Articles: ArticleDTO[];
+
+    UpdateDate: Date;
 }

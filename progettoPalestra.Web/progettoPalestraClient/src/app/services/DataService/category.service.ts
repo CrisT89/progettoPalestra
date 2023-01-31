@@ -20,7 +20,10 @@ export class CategoryService {
     saveCategory(category: CategoryDTO): Observable<any> {
         return this.http.post<any>(environment.apiFullUrl + '/category', category);
     }
-
+    
+    modifyCategory(id: number, category: CategoryDTO): Observable<any> {
+        return this.http.put<any>(environment.apiFullUrl + '/category/' + id, category);
+    }
     deleteCategory(id: number): Observable<any> {
         return this.http.delete<any>(environment.apiFullUrl + '/category/' + id);
     }

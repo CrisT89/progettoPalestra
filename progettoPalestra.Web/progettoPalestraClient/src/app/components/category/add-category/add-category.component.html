@@ -1,4 +1,5 @@
-<div class="container-fluid">
+<!-- Add Mode -->
+<div *ngIf="!idParam" class="container-fluid">
     <div class="row">
         <div class="col-md-6">
             <h4>Nuova Categoria</h4>
@@ -46,6 +47,65 @@
                 <button type="submit" class="btn btn-primary"
                 [disabled]="categoryForm.disabled || categoryForm.invalid">
                     Salva
+                </button>
+            </div>
+        </div>
+    </form>
+    
+        <button class="btn btn-primary" (click)="suConsole()">Nome su console</button>
+   
+</div>
+
+
+<!-- Edit Mode -->
+<div *ngIf="idParam" class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Modifica Categoria</h4>
+        </div>
+    </div>
+
+    <form *ngIf="categoryForm" [formGroup]="categoryForm" (ngSubmit)="modifyCategory()">
+        <div class="container-fluid mt-4">
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <mat-label>Nome</mat-label>
+                        <input type="text" matInput formControlName="Nome"
+                            placeholder="Nome Categoria">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <mat-label>Label</mat-label>
+                        <input type="text" matInput formControlName="Label"
+                            placeholder="">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <mat-form-field class="mat-form-field-fluid">
+                        <textarea matInput
+                            rows="3"
+                            placeholder="Breve descrizione"
+                            formControlName="Descrizione">
+                        </textarea>
+                    </mat-form-field> 
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-auto text-right">
+            <div class="col-sm-12 justify-content-end">
+                <input type="button" 
+                    class="btn btn-success" 
+                    value="Torna Indietro"
+                    (click)="onNavigateBack()">
+                <button type="submit" class="btn btn-primary"
+                [disabled]="categoryForm.disabled || categoryForm.invalid">
+                    Salva Modifiche
                 </button>
             </div>
         </div>
