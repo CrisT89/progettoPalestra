@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ArticleDTO } from '../../../models/Data/article.model';
+import { ArticleService } from '../../../services/DataService/article.service';
 
 @Component({
   selector: 'app-add-article',
@@ -7,9 +11,65 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddArticleComponent implements OnInit {
 
-  constructor() { }
+  constructor(private formBuilder: FormBuilder,
+              private articleService: ArticleService,
+              private router: Router,
+              private route: ActivatedRoute,
+              ) { }
+
+  articleForm: FormGroup;
+  article: ArticleDTO = new ArticleDTO();
 
   ngOnInit(): void {
+    this.createForm();
   }
 
+  selectedTabCounter: number = 0;
+  maxNumberOfTabs: number = 1;
+  
+  createForm() {
+    this.articleForm = this.formBuilder.group({
+      Nome: [
+        this.article.Name, [Validators.required]
+      ],
+      Prezzo: [
+        this.article.Price,
+        [Validators.required, ],
+      ],
+      Codice: [
+        this.article.Code,
+        [Validators.required, ],
+      ],
+      Descrizione: [
+        this.article.Description,
+        [Validators.required, ],
+      ],
+      ImagePath: [
+        this.article.ImagePath, []
+      ],
+    });
+  }
+  
+  saveFunctionName(exit: boolean = true) {
+    const values: Object = this.articleForm.value;
+    /*bind the inserted values*/
+    this.article.Name = values['Nome'];
+    this.article.Price = values['Prezzo'];
+    this.article.Code = values['Codice'];
+    this.article.Description = values['Descrizione'];
+    this.article.ImagePath = values['ImagePath'];
+    this.article.FK_Category = 1;                                     //FK costante!!!
+    if (exit) {
+      this.articleService.saveArticle(this.article).subscribe();
+      this.exitFunctionName()
+    } else {
+      this.articleService.saveArticle(this.article).subscribe();
+    }
+  
+    console.log(values, "save!");
+  }
+  
+  exitFunctionName() {
+    this.router.navigate(['/articles']);
+  }
 }

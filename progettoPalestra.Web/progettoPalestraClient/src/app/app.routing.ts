@@ -16,6 +16,8 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
 import { ListNotificationsComponent } from './components/notifications/list-notifications/list-notifications.component';
 import { ListCategoryComponent } from './components/category/list-category/list-category.component';
 import { AddCategoryComponent } from './components/category/add-category/add-category.component';
+import { ListArticleComponent } from './components/article/list-article/list-article.component';
+import { AddArticleComponent } from './components/article/add-article/add-article.component';
 
 export const routes: Routes = [
   {
@@ -94,23 +96,44 @@ export const routes: Routes = [
         path: 'categories',
         component: ListCategoryComponent,
         data: {
-          breadcrumbs: 'Categories'
+          breadcrumbs: 'Categorie'
         }
       },
       {
         path: 'newcategory',
         component: AddCategoryComponent,
         data: {
-          breadcrumbs: 'New Category'
+          breadcrumbs: 'Nuova Categoria'
         }
       },
       {
         path: 'newcategory/:id',
         component: AddCategoryComponent,
         data: {
-          breadcrumbs: 'Edit Category'
+          breadcrumbs: 'Modifica Categoria'
         }
-      }
+      },
+      {
+        path: 'articles',
+        component: ListArticleComponent,
+        data: {
+          breadcrumbs: 'Articoli'
+        }
+      },
+      {
+        path: 'newarticle',
+        component: AddArticleComponent,
+        data: {
+          breadcrumbs: 'Nuovo Articolo'
+        }
+      },
+      {
+        path: 'newarticle/:id',
+        component: AddArticleComponent,
+        data: {
+          breadcrumbs: 'Modifica Articolo'
+        }
+      },
     ]
   },
   { path: '**', component: ErrorComponent }

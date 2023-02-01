@@ -12,11 +12,14 @@ export class ArticleDTO {
     DiscountPrice: number;
     IVA: number;
     ImagePath: string;
-    ImageData: string;
+    //ImageData: string;
     EndOfValidity: Date;
     Suspended: boolean;
     InEvidence: boolean;
 
     Category: CategoryDTO;
     FK_Category: number;
+
+    UpdateDate: Date;
+
 }

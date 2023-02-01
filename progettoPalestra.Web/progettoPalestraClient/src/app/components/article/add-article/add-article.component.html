@@ -1,1 +1,82 @@
-<p>add-article works!</p>
+<form *ngIf="articleForm" [formGroup]="articleForm" class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <h4>Nuovo Articolo</h4>
+        </div>
+    </div>
+    <mat-tab-group [(selectedIndex)]="selectedTabCounter" dynamicHeight>
+        <mat-tab label="Principale">
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-label>Nome</mat-label>
+                            <input type="text" matInput formControlName="Nome"
+                                placeholder="Nome articolo">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-label>Prezzo</mat-label>
+                            <input matInput formControlName="Prezzo" eqpNumericMask [options]="{suffix: ' €', precision: 2, allowNegative: false, thousands: '.' }">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-label>Codice Univoco</mat-label>
+                            <input type="text" matInput formControlName="Codice"
+                                placeholder="Codice articolo">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <mat-form-field class="mat-form-field-fluid">
+                            <textarea matInput
+                                rows="1"
+                                placeholder="Descrizione articolo"
+                                formControlName="Descrizione">
+                            </textarea>
+                        </mat-form-field> 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <mat-form-field>
+                            <mat-label>URL immagine</mat-label>
+                            <input type="text" matInput formControlName="ImagePath"
+                                placeholder="Url...">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <!-- other tabs -->
+        <mat-tab label="Altre informazioni">
+            <div class="container-fluid mt-4">
+                <div class="row">
+                    inputDivColumns
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</form>
+<div class="row mt-3">
+    <div class="col-12 text-right">
+        <button [disabled]="selectedTabCounter == 0" (click)="selectedTabCounter = selectedTabCounter - 1"
+            mat-button>
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+        <button (click)="exitFunctionName()" class="btn mat-raised-button mr-1">
+            Esci
+        </button>
+        <button type="submit" (click)="saveFunctionName()" class="btn btn-primary"
+            [disabled]="articleForm?.disabled || articleForm?.invalid">
+            Salva ed esci
+        </button>
+        <button [disabled]="selectedTabCounter == maxNumberOfTabs" (click)="selectedTabCounter = selectedTabCounter + 1"
+            mat-button>
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+    </div>
+</div>

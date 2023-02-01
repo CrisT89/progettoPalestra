@@ -21,5 +21,6 @@ namespace progettoPalestra.Web.Mappings.ModelsDTO.DataDTO
         public int FK_Category { get; set; }
         public bool? Suspended { get; set; }
         public bool? InEvidence { get; set; }
+        public DateTime? UpdateDate { get; set; }
     }
 }

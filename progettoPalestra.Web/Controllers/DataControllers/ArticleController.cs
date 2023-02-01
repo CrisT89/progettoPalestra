@@ -51,6 +51,19 @@ namespace progettoPalestra.Web.Controllers.DataControllers
             return Ok(articleSavedId);
         }
 
+        [HttpPut, Route("/api/[controller]/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ModifyArticle(int id, [FromBody] ArticleDTO articleDto)
+        {
+            if (id != articleDto.ID)
+            {
+                return BadRequest();
+            }
+            Article articleToSave = _autoMappingService.CurrentMapper.Map<Article>(articleDto);
+            int articleSavedId = _articleService.Save(articleToSave);
+            return Ok(articleSavedId);
+        }
+
         [HttpDelete, Route("/api/[controller]/{id}")]
         [AllowAnonymous]
         public async Task<IActionResult> DeleteArticle(int id)
