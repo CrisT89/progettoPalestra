@@ -55,7 +55,39 @@
         <mat-tab label="Altre informazioni">
             <div class="container-fluid mt-4">
                 <div class="row">
-                    inputDivColumns
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-label>IVA</mat-label>
+                            <input matInput formControlName="IVA" eqpNumericMask [options]="{suffix: ' %', precision: 2, allowNegative: false, min: 0, max: 100}">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-label>Prezzo in sconto</mat-label>
+                            <input matInput formControlName="PrezzoScontato" eqpNumericMask [options]="{suffix: ' €', precision: 2, allowNegative: false, thousands: '.', min: 0}">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <mat-form-field>
+                            <mat-label>Data Scadenza</mat-label>
+                            <input type="date" matInput formControlName="DataScadenza"
+                                placeholder="placeholder">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-center">
+                        <mat-slide-toggle
+                            formControlName="Sospeso">
+                            Sospeso
+                        </mat-slide-toggle>
+                    </div>
+                    <div class="col-md-4 d-flex align-items-center">
+                        <mat-checkbox
+                            formControlName="InEvidenza">
+                            In Evidenza
+                        </mat-checkbox>
+                    </div>
                 </div>
             </div>
         </mat-tab>

@@ -18,7 +18,9 @@ export class AddArticleComponent implements OnInit {
               ) { }
 
   articleForm: FormGroup;
-  article: ArticleDTO = new ArticleDTO();
+  defaultIVA: number = 10;
+  article: ArticleDTO = new ArticleDTO(this.defaultIVA);
+  
 
   ngOnInit(): void {
     this.createForm();
@@ -47,6 +49,21 @@ export class AddArticleComponent implements OnInit {
       ImagePath: [
         this.article.ImagePath, []
       ],
+      IVA: [
+        this.article.IVA, [Validators.min(0), Validators.max(100)]
+      ],
+      PrezzoScontato: [
+        this.article.DiscountPrice, [Validators.min(0), Validators.max(this.article.Price)]
+      ],
+      DataScadenza: [
+        this.article.EndOfValidity, []
+      ],
+      Sospeso: [
+        this.article.Suspended, []
+      ],
+      InEvidenza: [
+        this.article.InEvidence, []
+      ],
     });
   }
   
@@ -58,7 +75,12 @@ export class AddArticleComponent implements OnInit {
     this.article.Code = values['Codice'];
     this.article.Description = values['Descrizione'];
     this.article.ImagePath = values['ImagePath'];
-    this.article.FK_Category = 1;                                     //FK costante!!!
+    this.article.FK_Category = 1;                                  //FK costante!!!
+    this.article.IVA = values['IVA'];
+    this.article.DiscountPrice = values['PrezzoScontato'];                                 
+    this.article.EndOfValidity = values['DataScadenza'];                                 
+    this.article.Suspended = values['Sospeso'];                                 
+    this.article.InEvidence = values['InEvidenza'];                                 
     if (exit) {
       this.articleService.saveArticle(this.article).subscribe();
       this.exitFunctionName()

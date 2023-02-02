@@ -4,6 +4,17 @@ Modello per l'articolo
 */
 
 export class ArticleDTO {
+
+    constructor(iva: number) {
+        this.IVA = iva;
+        // if (this.IVA==null) {
+        //     this.PriceWithIVA = this.Price;
+        // }
+        // else {
+        //     this.PriceWithIVA = this.Price*(1+this.IVA/100);
+        // }
+    }
+
     ID: number;
     Code: string;
     Name: string;
@@ -12,7 +23,7 @@ export class ArticleDTO {
     DiscountPrice: number;
     IVA: number;
     ImagePath: string;
-    //ImageData: string;
+    ImageData: string;
     EndOfValidity: Date;
     Suspended: boolean;
     InEvidence: boolean;
@@ -21,5 +32,7 @@ export class ArticleDTO {
     FK_Category: number;
 
     UpdateDate: Date;
+
+    PriceWithIVA: number;
 
 }
