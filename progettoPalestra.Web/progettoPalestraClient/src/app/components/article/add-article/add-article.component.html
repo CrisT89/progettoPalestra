@@ -76,17 +76,28 @@
                                 placeholder="placeholder">
                         </mat-form-field>
                     </div>
-                    <div class="col-md-4 d-flex align-items-center">
+                    <div class="col-md-3 d-flex align-items-center">
                         <mat-slide-toggle
                             formControlName="Sospeso">
                             Sospeso
                         </mat-slide-toggle>
                     </div>
-                    <div class="col-md-4 d-flex align-items-center">
+                    <div class="col-md-3 d-flex align-items-center">
                         <mat-checkbox
                             formControlName="InEvidenza">
                             In Evidenza
                         </mat-checkbox>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- category lookup -->
+                        <eqp-lookup [entityType]="'Category'" 
+                                    [formControlName]="'Categoria'" 
+                                    [(ngModelInput)]="article.Category" 
+                                    placeholder="Seleziona la categoria"
+                                    [appendToInput]="'body'">
+                                </eqp-lookup>
                     </div>
                 </div>
             </div>

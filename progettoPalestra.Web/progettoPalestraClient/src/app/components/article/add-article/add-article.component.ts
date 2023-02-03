@@ -64,6 +64,9 @@ export class AddArticleComponent implements OnInit {
       InEvidenza: [
         this.article.InEvidence, []
       ],
+      Categoria: [
+        this.article.Category, []
+      ],
     });
   }
   
@@ -75,7 +78,7 @@ export class AddArticleComponent implements OnInit {
     this.article.Code = values['Codice'];
     this.article.Description = values['Descrizione'];
     this.article.ImagePath = values['ImagePath'];
-    this.article.FK_Category = 1;                                  //FK costante!!!
+    this.article.FK_Category = values['Categoria']['ID'];                               
     this.article.IVA = values['IVA'];
     this.article.DiscountPrice = values['PrezzoScontato'];                                 
     this.article.EndOfValidity = values['DataScadenza'];                                 

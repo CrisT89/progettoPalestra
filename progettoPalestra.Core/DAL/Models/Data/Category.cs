@@ -1,4 +1,6 @@
-﻿using EQP.EFRepository.Core.Interface;
+﻿using EQP.EFRepository.Core.Attributes;
+using EQP.EFRepository.Core.Interface;
+using progettoPalestra.Core.HelperService.LookupEntityService;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,6 +10,8 @@ using System.Threading.Tasks;
 
 namespace progettoPalestra.Core.DAL.Models.Data
 {
+    [Serializable]
+    [LookupClass(typeof(CategoryLookupService), new string[] {"Name", "Label"})]
     public class Category : IBaseEntity, IAuditEntity<int>
     {
         public int ID { get; set; }
