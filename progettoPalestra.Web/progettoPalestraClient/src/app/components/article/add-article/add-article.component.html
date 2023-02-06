@@ -1,7 +1,8 @@
 <form *ngIf="articleForm" [formGroup]="articleForm" class="container-fluid">
     <div class="row">
         <div class="col-md-6">
-            <h4>Nuovo Articolo</h4>
+            <h4 *ngIf="!idParam">Nuovo Articolo</h4>
+            <h4 *ngIf="idParam">Modifica Articolo</h4>
         </div>
     </div>
     <mat-tab-group [(selectedIndex)]="selectedTabCounter" dynamicHeight>

@@ -12,23 +12,35 @@ import { ArticleService } from '../../../services/DataService/article.service';
 export class AddArticleComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
-              private articleService: ArticleService,
-              private router: Router,
-              private route: ActivatedRoute,
-              ) { }
+    private articleService: ArticleService,
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
 
   articleForm: FormGroup;
   defaultIVA: number = 10;
   article: ArticleDTO = new ArticleDTO(this.defaultIVA);
-  
+  idParam: number;
+
 
   ngOnInit(): void {
-    this.createForm();
+    this.idParam = this.route.snapshot.params['id'];
+    if (this.idParam) {
+      this.articleService.getById(this.idParam).subscribe(
+        data => {
+          this.article = data;
+          this.createForm();
+        }
+      );
+    }
+    else {
+      this.createForm();
+    }
   }
 
   selectedTabCounter: number = 0;
   maxNumberOfTabs: number = 1;
-  
+
   createForm() {
     this.articleForm = this.formBuilder.group({
       Nome: [
@@ -36,15 +48,15 @@ export class AddArticleComponent implements OnInit {
       ],
       Prezzo: [
         this.article.Price,
-        [Validators.required, ],
+        [Validators.required,],
       ],
       Codice: [
         this.article.Code,
-        [Validators.required, ],
+        [Validators.required,],
       ],
       Descrizione: [
         this.article.Description,
-        [Validators.required, ],
+        [Validators.required,],
       ],
       ImagePath: [
         this.article.ImagePath, []
@@ -69,7 +81,7 @@ export class AddArticleComponent implements OnInit {
       ],
     });
   }
-  
+
   saveFunctionName(exit: boolean = true) {
     const values: Object = this.articleForm.value;
     /*bind the inserted values*/
@@ -78,22 +90,32 @@ export class AddArticleComponent implements OnInit {
     this.article.Code = values['Codice'];
     this.article.Description = values['Descrizione'];
     this.article.ImagePath = values['ImagePath'];
-    this.article.FK_Category = values['Categoria']['ID'];                               
+    this.article.FK_Category = values['Categoria']['ID'];
     this.article.IVA = values['IVA'];
-    this.article.DiscountPrice = values['PrezzoScontato'];                                 
-    this.article.EndOfValidity = values['DataScadenza'];                                 
-    this.article.Suspended = values['Sospeso'];                                 
-    this.article.InEvidence = values['InEvidenza'];                                 
+    this.article.DiscountPrice = values['PrezzoScontato'];
+    this.article.EndOfValidity = values['DataScadenza'];
+    this.article.Suspended = values['Sospeso'];
+    this.article.InEvidence = values['InEvidenza'];
     if (exit) {
-      this.articleService.saveArticle(this.article).subscribe();
+      if (this.idParam) {
+        this.articleService.modifyArticle(this.idParam, this.article).subscribe();
+      }
+      else {
+        this.articleService.saveArticle(this.article).subscribe();
+      }
       this.exitFunctionName()
     } else {
-      this.articleService.saveArticle(this.article).subscribe();
+      if (this.idParam) {
+        this.articleService.modifyArticle(this.idParam, this.article).subscribe();
+      }
+      else {
+        this.articleService.saveArticle(this.article).subscribe();
+      }
     }
-  
+
     console.log(values, "save!");
   }
-  
+
   exitFunctionName() {
     this.router.navigate(['/articles']);
   }

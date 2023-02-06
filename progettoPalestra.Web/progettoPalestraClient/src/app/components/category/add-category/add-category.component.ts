@@ -12,28 +12,24 @@ import { CategoryService } from '../../../services/DataService/category.service'
 export class AddCategoryComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
-              private categoryService: CategoryService,
-              private router: Router,
-              private route: ActivatedRoute) { }
+    private categoryService: CategoryService,
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   categoryForm: FormGroup;
-  category:CategoryDTO = new CategoryDTO();
-  idParam: number; 
+  category: CategoryDTO = new CategoryDTO();
+  idParam: number;
 
   ngOnInit(): void {
     this.idParam = this.route.snapshot.params['id'];
-    if (this.idParam)
-    {
+    if (this.idParam) {
       this.categoryService.getById(this.idParam)
-      .subscribe(data => {
+        .subscribe(data => {
           this.category = data;
           this.createForm()
-          //console.log(this.category);
-      });
-      // this.category.Name = 'loki';
+        });
     }
-    else
-    {
+    else {
       this.createForm();
     }
   }
@@ -45,7 +41,7 @@ export class AddCategoryComponent implements OnInit {
       'Descrizione': [this.category.Description, []],
     });
   }
-  
+
   saveCategory() {
     const values: Object = this.categoryForm.value;
     /*bind the inserted values and then save them*/
@@ -53,7 +49,7 @@ export class AddCategoryComponent implements OnInit {
     this.category.Name = values['Nome'];
     this.category.Label = values['Label'];
     this.category.Description = values['Descrizione'];
-    this.categoryService.saveCategory(this.category).subscribe(result => {});
+    this.categoryService.saveCategory(this.category).subscribe(result => { });
     this.onNavigateBack();
   }
 
@@ -64,7 +60,7 @@ export class AddCategoryComponent implements OnInit {
     this.category.Name = values['Nome'];
     this.category.Label = values['Label'];
     this.category.Description = values['Descrizione'];
-    this.categoryService.modifyCategory(this.idParam, this.category).subscribe(result => {});
+    this.categoryService.modifyCategory(this.idParam, this.category).subscribe(result => { });
     this.onNavigateBack();
   }
 
