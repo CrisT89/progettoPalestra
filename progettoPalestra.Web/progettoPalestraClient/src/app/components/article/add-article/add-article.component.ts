@@ -61,8 +61,8 @@ export class AddArticleComponent implements OnInit {
       ImagePath: [
         this.article.ImagePath, []
       ],
-      IVA: [
-        this.article.IVA, [Validators.min(0), Validators.max(100)]
+      Iva: [
+        this.article.Iva, [Validators.min(0), Validators.max(100)]
       ],
       PrezzoScontato: [
         this.article.DiscountPrice, [Validators.min(0), Validators.max(this.article.Price)]
@@ -91,7 +91,7 @@ export class AddArticleComponent implements OnInit {
     this.article.Description = values['Descrizione'];
     this.article.ImagePath = values['ImagePath'];
     this.article.FK_Category = values['Categoria']['ID'];
-    this.article.IVA = values['IVA'];
+    this.article.Iva = values['Iva'];
     this.article.DiscountPrice = values['PrezzoScontato'];
     this.article.EndOfValidity = values['DataScadenza'];
     this.article.Suspended = values['Sospeso'];

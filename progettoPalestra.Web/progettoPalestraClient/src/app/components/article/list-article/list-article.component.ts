@@ -28,16 +28,23 @@ export class ListArticleComponent implements OnInit, OnDestroy {
 
   loadArticles(): void {
     this.articleService.getAllArticles().subscribe(
-      data => { this.articles = data },
+      data => { data.forEach(element => {this.prezzoIva(element);});
+                this.articles = data; },
       err => { DialogService.Error("Qualcosa è andato storto nella lettura degli articoli: " + err) }
     );
   }
 
+  prezzoIva(articolo: ArticleDTO): void {
+    if (articolo.Iva) {
+      articolo.Price = articolo.Price*(1 + articolo.Iva / 100);
+    }
+  }
+
   configureColumns() {
     this.columns = [
-      { key: "Code", display: "Codice", styles: {} },
-      { key: "Name", display: "Nome", styles: {} },
-      { key: "Price", display: "Prezzo", styles: {} },
+      { key: "Code", display: "Codice", styles: {cellAlignment: 3} },
+      { key: "Name", display: "Nome", styles: {cellAlignment: 3} },
+      { key: "Price", display: "Prezzo (con IVA)", numberPipe: 3, currencyPipeCode: "EUR" ,format: "1.2-2" ,styles: {cellAlignment: 3} },
       {
         key: "action", display: "",
         type: TypeColumn.MenuAction, buttonMenuIcon: "more_vert", styles: { flex: "0 0 6%" },

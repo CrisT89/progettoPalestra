@@ -6,7 +6,7 @@ Modello per l'articolo
 export class ArticleDTO {
 
     constructor(iva: number) {
-        this.IVA = iva;
+        this.Iva = iva;
         // if (this.IVA==null) {
         //     this.PriceWithIVA = this.Price;
         // }
@@ -21,7 +21,7 @@ export class ArticleDTO {
     Description: string;
     Price: number;
     DiscountPrice: number;
-    IVA: number;
+    Iva: number;
     ImagePath: string;
     ImageData: string;
     EndOfValidity: Date;
@@ -33,6 +33,5 @@ export class ArticleDTO {
 
     UpdateDate: Date;
 
-    PriceWithIVA: number;
 
 }
