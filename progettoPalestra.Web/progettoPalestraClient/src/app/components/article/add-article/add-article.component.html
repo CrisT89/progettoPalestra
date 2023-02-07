@@ -41,12 +41,27 @@
                         </mat-form-field> 
                     </div>
                 </div>
+                
                 <div class="row">
+                    <div class="col-md-12">
+                      <eqp-attachments
+                        [multipleAttachment]="false"
+                        [showMatCard]="true"
+                        [attachmentsList]="image"
+                        [allowOnlyImages]="true"
+                        [isDisabled]="false"
+                        (downloadAttachment)="viewAttachmentFunctionName($event)"
+                        (onDeleteAttachment)="onDeleteAttachmentFunctionName($event)"
+                        (localEditedAttachments)="catchAttachmentListFunctionName($event)">
+                      </eqp-attachments>
+                    </div>
+                </div>
+                <div class="row" *ngIf="article.ImagePath">
                     <div class="col-md-8">
                         <mat-form-field>
                             <mat-label>URL immagine</mat-label>
-                            <input type="text" matInput formControlName="ImagePath"
-                                placeholder="Url...">
+                            <input type="text" matInput 
+                                placeholder="Url..." disabled [value]="article.ImagePath">
                         </mat-form-field>
                     </div>
                 </div>

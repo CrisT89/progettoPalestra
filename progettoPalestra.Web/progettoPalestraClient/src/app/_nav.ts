@@ -37,7 +37,7 @@ export const navItems: INavData[] = [
     icon: 'fa fa-pie-chart',
   },
   {
-    name: 'Menù',
+    name: 'Menù Amministrazione',
     url: '',
     icon: 'fa fa-tags',
     children: [

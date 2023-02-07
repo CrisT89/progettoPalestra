@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IAttachmentDTO } from '@eqproject/eqp-attachments';
 import { ArticleDTO } from '../../../models/Data/article.model';
 import { ArticleService } from '../../../services/DataService/article.service';
 
@@ -21,6 +22,7 @@ export class AddArticleComponent implements OnInit {
   defaultIVA: number = 10;
   article: ArticleDTO = new ArticleDTO(this.defaultIVA);
   idParam: number;
+  image: Array<IAttachmentDTO>;
 
 
   ngOnInit(): void {
@@ -58,9 +60,9 @@ export class AddArticleComponent implements OnInit {
         this.article.Description,
         [Validators.required,],
       ],
-      ImagePath: [
-        this.article.ImagePath, []
-      ],
+      // ImagePath: [
+      //   this.article.ImagePath, []
+      // ],
       Iva: [
         this.article.Iva, [Validators.min(0), Validators.max(100)]
       ],
@@ -89,7 +91,7 @@ export class AddArticleComponent implements OnInit {
     this.article.Price = values['Prezzo'];
     this.article.Code = values['Codice'];
     this.article.Description = values['Descrizione'];
-    this.article.ImagePath = values['ImagePath'];
+    //this.article.ImagePath = values['ImagePath'];
     this.article.FK_Category = values['Categoria']['ID'];
     this.article.Iva = values['Iva'];
     this.article.DiscountPrice = values['PrezzoScontato'];
@@ -118,5 +120,21 @@ export class AddArticleComponent implements OnInit {
 
   exitFunctionName() {
     this.router.navigate(['/articles']);
+  }
+
+  viewAttachmentFunctionName($event) {
+
+  }
+
+  onDeleteAttachmentFunctionName($event) {
+
+  }
+
+  catchAttachmentListFunctionName(event: Event) {
+    if (event[0]['AttachmentType']==2)
+    {
+      this.article.ImagePath = event[0]['FilePath'];
+    }
+    console.log(event);
   }
 }
