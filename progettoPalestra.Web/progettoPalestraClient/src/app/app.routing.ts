@@ -18,6 +18,8 @@ import { ListCategoryComponent } from './components/category/list-category/list-
 import { AddCategoryComponent } from './components/category/add-category/add-category.component';
 import { ListArticleComponent } from './components/article/list-article/list-article.component';
 import { AddArticleComponent } from './components/article/add-article/add-article.component';
+import { HomeComponent } from './components/public/home/home.component';
+import { ArticleCardsComponent } from './components/public/article-cards/article-cards.component';
 
 export const routes: Routes = [
   {
@@ -133,6 +135,19 @@ export const routes: Routes = [
         data: {
           breadcrumbs: 'Modifica Articolo'
         }
+      },
+      {
+        path: 'public-home',
+        component: HomeComponent,
+        data: {
+          breadcrumbs: 'Public Home'
+        },
+        children: [
+          {
+            path: 'articles',
+            component: ArticleCardsComponent,
+          }
+        ]
       },
     ]
   },

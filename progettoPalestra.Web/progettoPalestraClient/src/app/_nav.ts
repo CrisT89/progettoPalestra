@@ -53,5 +53,9 @@ export const navItems: INavData[] = [
       }
     ]
   },
-
+  {
+    name: 'Public',
+    url: '/public-home',
+    icon: 'fa fa-solid fa-users',
+  },
 ];

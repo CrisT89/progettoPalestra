@@ -57,6 +57,11 @@ import { PendingChangesGuard } from './helpers/componentDeactivate.guard';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListArticleComponent } from './components/article/list-article/list-article.component';
 import { AddArticleComponent } from './components/article/add-article/add-article.component';
+import { HomeComponent } from './components/public/home/home.component';
+import { NavigationComponent } from './components/public/navigation/navigation.component';
+import { ArticleCardsComponent } from './components/public/article-cards/article-cards.component';
+import { ArticleCardComponent } from './components/public/article-card/article-card.component';
+
 registerLocaleData(localeIt, 'it-IT');
 
 @NgModule({
@@ -96,7 +101,11 @@ registerLocaleData(localeIt, 'it-IT');
     ListCategoryComponent,
     AddCategoryComponent,
     ListArticleComponent,
-    AddArticleComponent
+    AddArticleComponent,
+    HomeComponent,
+    NavigationComponent,
+    ArticleCardsComponent,
+    ArticleCardComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
