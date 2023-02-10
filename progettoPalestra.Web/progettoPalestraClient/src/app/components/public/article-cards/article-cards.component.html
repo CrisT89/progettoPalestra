@@ -1,18 +1,8 @@
+<p *ngIf="inEvidence">QUESTO SI VEDE SE SCHERMATA IN EVIDENZA</p>
 <div class="public-container">
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-    <app-article-card></app-article-card>
-
+    <app-article-card 
+        *ngFor="let article of articleList; let i = index"
+        [article]="article"
+        [index]="i"></app-article-card>
 </div>
 

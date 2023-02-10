@@ -146,6 +146,16 @@ export const routes: Routes = [
           {
             path: 'articles',
             component: ArticleCardsComponent,
+            data: {
+              breadcrumbs: 'Tutti gli Articoli'
+            }
+          },
+          {
+            path: 'articles',
+            component: ArticleCardsComponent,
+            data: {
+              breadcrumbs: 'Articoli in Evidenza'
+            }
           }
         ]
       },

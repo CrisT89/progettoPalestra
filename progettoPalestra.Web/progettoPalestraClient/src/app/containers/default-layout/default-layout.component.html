@@ -7,7 +7,11 @@
   
   <!-- NAVIGAZIONE PUBBLICA -->
     <ul class="public">
-        <li class="public"><a class="public" routerLink="">In Evidenza</a></li>
+        <li class="public">
+          <a class="public" 
+            routerLink="/public-home/articles"
+            [queryParams]="{inEvidence: true}">In Evidenza</a>
+        </li>
         <li class="public"><a class="public" routerLink="/public-home/articles">Mostra Tutti</a></li>
     </ul>
 
