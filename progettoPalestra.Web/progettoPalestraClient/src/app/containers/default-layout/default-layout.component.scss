@@ -29,3 +29,30 @@
     overflow: visible !important;
   }
 }
+
+// NAVIGAZIONE PUBBLICA
+ul.public {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  // background-color: white;
+  // position: fixed;
+  top: 0;
+}
+
+li.public {
+  float: left;
+  // border-right: 1px solid #6666666f;
+}
+li.public a.public {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  color: white;
+  font-size: medium;
+}
+
+li.public a:hover {
+  background-color: rgba(82, 116, 226, 0.578);
+}

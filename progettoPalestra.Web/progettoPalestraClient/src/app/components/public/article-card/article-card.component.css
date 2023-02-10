@@ -1,0 +1,12 @@
+.title {
+    font-size: large;
+}
+
+.price {
+    font-size: medium;
+}
+
+.article {
+    max-width: 200px;
+    margin: 10px;
+}
