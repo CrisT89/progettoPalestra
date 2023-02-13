@@ -15,6 +15,7 @@ export class ArticleCardComponent implements OnInit {
   @Input() index: number;
   categoryName: string;
   category: CategoryDTO;
+  @Input() inByCategory: boolean;
 
   ngOnInit(): void {
     this.categoryService.getById(this.article.FK_Category)

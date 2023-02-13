@@ -4,16 +4,27 @@
   [navbarBrandMinimized]="{src: 'assets/img/brand/icona-logo.svg', width: 30, height: 30, alt: 'Icona Logo'}"
   [sidebarToggler]="'lg'" [asideMenuToggler]="false" [ngStyle]="{ 'z-index':'1000' }">
 
-  
+
   <!-- NAVIGAZIONE PUBBLICA -->
-    <ul class="public">
-        <li class="public">
-          <a class="public" 
-            routerLink="/public-home/articles"
-            [queryParams]="{inEvidence: true}">In Evidenza</a>
-        </li>
-        <li class="public"><a class="public" routerLink="/public-home/articles">Mostra Tutti</a></li>
-    </ul>
+  <ul class="nav navbar-nav">
+    <li class="public">
+      <a class="public" routerLink="/public-home/articles/inEvidence">In Evidenza</a>
+    </li>
+    <li class="public">
+      <a class="public" routerLink="/public-home/articles">Mostra Tutti</a>
+    </li>
+    <li class="nav-item dropdown public" dropdown placement="bottom right">
+      <a class="nav-link public" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+        aria-expanded="false" dropdownToggle (click)="false">Per Categoria</a>
+      <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
+        <a class="dropdown-item pointer" 
+          *ngFor="let category of categoryList"
+          [routerLink]="'/public-home/articles/byCategory/' + category.ID" >
+          {{category.Name}}</a>
+      </div>
+    </li>
+
+  </ul>
 
 
   <!--PARTE DESTRA-->
@@ -111,7 +122,9 @@
 
     <div class="row mt-4">
       <div class="col-sm-12">
-        <div [innerHTML]="selectedNotification.Notification.CompleteMessage || selectedNotification.Notification.Message"></div>
+        <div
+          [innerHTML]="selectedNotification.Notification.CompleteMessage || selectedNotification.Notification.Message">
+        </div>
       </div>
     </div>
 

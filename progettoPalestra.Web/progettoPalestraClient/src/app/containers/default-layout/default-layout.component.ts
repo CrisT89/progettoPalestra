@@ -13,6 +13,8 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NotificationService } from '../../services/notification.service';
 import { EventHandlerService } from '../../services/eventHandler.service';
+import { CategoryDTO } from '../../models/Data/category.model';
+import { CategoryService } from '../../services/DataService/category.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,6 +24,7 @@ import { EventHandlerService } from '../../services/eventHandler.service';
 export class DefaultLayoutComponent {
 
   currentUser: UserDTO;
+  categoryList: CategoryDTO[];
   public sidebarMinimized = false;
   public navItems = navItems;
 
@@ -52,7 +55,8 @@ export class DefaultLayoutComponent {
     private userService: UserService,
     private eventHandlerService: EventHandlerService,
     private dialog: MatDialog,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private categoryService: CategoryService
   ) {
     this.resetRouteReuseStrategy();
   }
@@ -72,7 +76,8 @@ export class DefaultLayoutComponent {
     //allora avvia i servizi per la ricezione delle notifiche push
     if (this.enableNotificationSystem && this.authService.getCurrentUser() != null && this.authService.getCurrentUser() != undefined) {
       this.initializeSocketNotificationConnection();
-    }
+          }
+    this.categoryService.getAllCategories().subscribe(categories =>this.categoryList = categories);
   }
 
   reloadComponent() {

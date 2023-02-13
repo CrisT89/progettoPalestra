@@ -140,7 +140,7 @@ export const routes: Routes = [
         path: 'public-home',
         component: HomeComponent,
         data: {
-          breadcrumbs: 'Public Home'
+          breadcrumbs: ''
         },
         children: [
           {
@@ -151,10 +151,17 @@ export const routes: Routes = [
             }
           },
           {
-            path: 'articles',
+            path: 'articles/:inEvidence',
             component: ArticleCardsComponent,
             data: {
               breadcrumbs: 'Articoli in Evidenza'
+            }
+          },
+          {
+            path: 'articles/byCategory/:id',
+            component: ArticleCardsComponent,
+            data: {
+              breadcrumbs: 'Articoli per Categoria'
             }
           }
         ]

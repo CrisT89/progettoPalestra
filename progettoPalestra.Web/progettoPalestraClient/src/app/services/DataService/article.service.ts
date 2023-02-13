@@ -20,6 +20,14 @@ export class ArticleService {
         return this.http.get<ArticleDTO>(environment.apiFullUrl + '/article/' + id);
     }
 
+    getInEvidence(): Observable<ArticleDTO[]>{
+        return this.http.get<ArticleDTO[]>(environment.apiFullUrl + '/article/GetInEvidence');
+    }
+
+    getByCategory(id: number): Observable<ArticleDTO[]> {
+        return this.http.get<ArticleDTO[]>(environment.apiFullUrl + '/article/GetByCategory/' + id);
+    }
+
     saveArticle(category: ArticleDTO): Observable<any> {
         return this.http.post<any>(environment.apiFullUrl + '/article', category)
             .pipe(tap(() => { this.articleListChanged.next(); }));

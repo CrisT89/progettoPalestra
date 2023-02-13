@@ -18,17 +18,42 @@ export class ArticleCardsComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   articleList: ArticleDTO[];
+  //articleInEvidenceList: ArticleDTO[];
   //categories: CategoryDTO[];
-  inEvidence: boolean;
+  inEvidence: string;
+  category_Id: number;
+  category_Name: string;
+  inByCategory: boolean = false;
 
   ngOnInit(): void {
-    this.articleService.getAllArticles()
-    .subscribe(
-      articles => this.articleList=articles);
-    this.route.queryParams
-      .subscribe(qparam => this.inEvidence = qparam['inEvidence']);
-    
-      
-  }
+    this.route.params
+      .subscribe(param => {
+        this.inEvidence = param['inEvidence'];
+        this.category_Id = param['id'];
+        this.loadArticles(this.inEvidence, this.category_Id);
+        if(this.category_Id) {
+          this.categoryService.getById(this.category_Id).subscribe(c => this.category_Name = c.Name);
+        }
+      });
+    }
+
+  loadArticles(evidence: string, id: number) {
+      if (evidence==null && id==null) {
+        this.inByCategory = false;
+        this.articleService.getAllArticles()
+        .subscribe(articles => this.articleList=articles);
+      }
+      if (evidence=='inEvidence') {
+        this.inByCategory = false;
+        this.articleService.getInEvidence()
+        .subscribe(articles => this.articleList = articles);
+      }
+      if (id) {
+        this.inByCategory = true;
+        this.articleService.getByCategory(id)
+        .subscribe(articles => this.articleList = articles);
+      }
+    }
+  
 
 }

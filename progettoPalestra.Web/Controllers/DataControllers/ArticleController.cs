@@ -42,6 +42,27 @@ namespace progettoPalestra.Web.Controllers.DataControllers
             return Ok(articleDto);
         }
 
+        //API per articoli in evidenza
+
+        [HttpGet, Route("/api/[controller]/GetInEvidence")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetInEvidence()
+        {
+            List<Article> articles = _articleService.GetBy(a=>a.InEvidence==true);
+            List<ArticleDTO> articlesDto = _autoMappingService.CurrentMapper.Map<List<ArticleDTO>>(articles);
+            return Ok(articlesDto);
+        }
+
+        //API articoli per categoria
+        [HttpGet, Route("/api/[controller]/GetByCategory/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetByCategory(int id)
+        {
+            List<Article> articles = _articleService.GetBy(a => a.FK_Category == id);
+            List<ArticleDTO> articlesDto = _autoMappingService.CurrentMapper.Map<List<ArticleDTO>>(articles);
+            return Ok(articlesDto);
+        }
+
         [HttpPost, Route("/api/[controller]")]
         [AllowAnonymous]
         public async Task<IActionResult> SaveArticle([FromBody] ArticleDTO articleDto)
