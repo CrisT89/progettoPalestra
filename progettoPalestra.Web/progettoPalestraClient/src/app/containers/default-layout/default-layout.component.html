@@ -30,6 +30,16 @@
   <!--PARTE DESTRA-->
   <ul class="nav navbar-nav ml-auto">
 
+    <!-- CARRELLO -->
+    <li >
+      <a mat-icon-button routerLink="/public-home/cart" [ngClass]="{disabled: cartArticleCount==0}">
+        <i class="fa fa-shopping-cart" 
+           style="font-size: 25px !important; color: white;"></i>
+        <span class="badge badge-info cart" *ngIf="cartArticleCount>0">{{cartArticleCount}}</span>
+      </a>
+      
+    </li>
+
     <!--NOTIFICATION-->
     <li class="nav-item notification-dropdown" placement="bottom right">
       <button mat-icon-button matMenuTrigger [matMenuTriggerFor]="notificationMenu" (click)="$event.stopPropagation();">

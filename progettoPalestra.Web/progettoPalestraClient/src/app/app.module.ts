@@ -61,6 +61,7 @@ import { HomeComponent } from './components/public/home/home.component';
 import { NavigationComponent } from './components/public/navigation/navigation.component';
 import { ArticleCardsComponent } from './components/public/article-cards/article-cards.component';
 import { ArticleCardComponent } from './components/public/article-card/article-card.component';
+import { CartComponent } from './components/public/cart/cart.component';
 
 registerLocaleData(localeIt, 'it-IT');
 
@@ -106,6 +107,7 @@ registerLocaleData(localeIt, 'it-IT');
     NavigationComponent,
     ArticleCardsComponent,
     ArticleCardComponent,
+    CartComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

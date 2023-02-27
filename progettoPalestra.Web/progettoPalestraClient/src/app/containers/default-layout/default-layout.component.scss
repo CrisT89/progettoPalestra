@@ -57,6 +57,22 @@ li.public a:hover {
   background-color: rgba(82, 116, 226, 0.578);
 }
 
+.cart {
+  position: absolute;
+  left: 24px;
+  top: 1px;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+  
+}
+
+a.disabled i {
+  color: rgb(216, 214, 214) !important;
+}
+
 // .p-dropdown {
 //   float: left;
 //   overflow: hidden;

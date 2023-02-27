@@ -20,6 +20,7 @@ import { ListArticleComponent } from './components/article/list-article/list-art
 import { AddArticleComponent } from './components/article/add-article/add-article.component';
 import { HomeComponent } from './components/public/home/home.component';
 import { ArticleCardsComponent } from './components/public/article-cards/article-cards.component';
+import { CartComponent } from './components/public/cart/cart.component';
 
 export const routes: Routes = [
   {
@@ -162,6 +163,13 @@ export const routes: Routes = [
             component: ArticleCardsComponent,
             data: {
               breadcrumbs: 'Articoli per Categoria'
+            }
+          },
+          {
+            path: 'cart',
+            component: CartComponent,
+            data: {
+              breadcrumbs: 'Carrello'
             }
           }
         ]

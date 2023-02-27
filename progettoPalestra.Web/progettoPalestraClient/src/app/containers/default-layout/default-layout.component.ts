@@ -15,6 +15,7 @@ import { NotificationService } from '../../services/notification.service';
 import { EventHandlerService } from '../../services/eventHandler.service';
 import { CategoryDTO } from '../../models/Data/category.model';
 import { CategoryService } from '../../services/DataService/category.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,6 +29,7 @@ export class DefaultLayoutComponent {
   public sidebarMinimized = false;
   public navItems = navItems;
 
+  cartArticleCount: number = 0;
   enableNotificationSystem: boolean = environment.enableNotificationSystem;
   notificationCount: number = 0;
   notificationList: Array<NotificationDetailDTO> = new Array<NotificationDetailDTO>();
@@ -56,9 +58,13 @@ export class DefaultLayoutComponent {
     private eventHandlerService: EventHandlerService,
     private dialog: MatDialog,
     private notificationService: NotificationService,
-    private categoryService: CategoryService
+    private categoryService: CategoryService,
+    private cartService: CartService
   ) {
     this.resetRouteReuseStrategy();
+    // this.currentUser = authService.getCurrentUser();
+    // console.log(this.currentUser);
+    
   }
 
   /**
@@ -78,6 +84,7 @@ export class DefaultLayoutComponent {
       this.initializeSocketNotificationConnection();
           }
     this.categoryService.getAllCategories().subscribe(categories =>this.categoryList = categories);
+    this.cartService.cartListChanged.subscribe(res => this.cartArticleCount = this.cartService.articleCount);
   }
 
   reloadComponent() {
@@ -90,7 +97,7 @@ export class DefaultLayoutComponent {
    * Logout
    */
   async logout() {
-    await this.hubConnection.stop().catch((err) => { console.log(err); });
+    // await this.hubConnection.stop().catch((err) => { console.log(err); });
     this.hubConnection = null;
     this.authService.logout();
   }

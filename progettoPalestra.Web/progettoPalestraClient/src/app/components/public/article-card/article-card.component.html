@@ -9,6 +9,19 @@
         <p>{{article.Description}}</p>
     </mat-card-content>
     <mat-card-actions>
-        <button mat-button>Aquista</button>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-4">
+                    <button class="float-right" mat-icon-button (click)="onAddToCart()"><mat-icon style="font-size: 40px">add_shopping_cart</mat-icon></button>
+                </div>
+                
+                <div class="col-8">
+                    <h4 *ngIf="articleCount>0" style="font-size: 30px; text-align: center;">X {{articleCount}}</h4>
+                </div>
+                
+            </div>
+        </div>
+        
+        
     </mat-card-actions>
 </mat-card>

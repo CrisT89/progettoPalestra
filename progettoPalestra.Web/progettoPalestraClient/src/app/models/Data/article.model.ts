@@ -33,5 +33,7 @@ export class ArticleDTO {
 
     UpdateDate: Date;
 
+    quantity?: number;
+    totalPrice?: number;
 
 }
