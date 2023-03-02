@@ -14,11 +14,11 @@ export class AuthGuard implements CanActivate {
    * Verifica soltanto se è presente il token di autenticazione
    */
   canActivate(): boolean {
-    // if (this.authService.tokenAvailable() != true || this.authService.getCurrentUser() == null) {
-    //   //Utente non loggato e quindi redirect alla pagina di Login
-    //   this.router.navigate(['/login']);
-    //   return false;
-    // }
+    if (this.authService.tokenAvailable() != true || this.authService.getCurrentUser() == null) {
+      //Utente non loggato e quindi redirect alla pagina di Login
+      this.router.navigate(['/public-home/articles']);
+      return false;
+    }
 
     //Utente loggato
     return true;

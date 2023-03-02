@@ -43,7 +43,6 @@ namespace progettoPalestra.Web.Controllers.DataControllers
         }
 
         [HttpPost, Route("/api/[controller]")]
-        [AllowAnonymous]
         public async Task<IActionResult> SaveCategory([FromBody] CategoryDTO categoryDto)
         {
             Category categoryToSave = _autoMappingService.CurrentMapper.Map<Category>(categoryDto);
@@ -52,7 +51,6 @@ namespace progettoPalestra.Web.Controllers.DataControllers
         }
 
         [HttpPut, Route("/api/[controller]/{id}")]
-        [AllowAnonymous]
         public async Task<IActionResult> ModifyCategory(int id, [FromBody] CategoryDTO categoryDto)
         {
             if (id != categoryDto.ID)
@@ -65,7 +63,6 @@ namespace progettoPalestra.Web.Controllers.DataControllers
         }
 
         [HttpDelete, Route("/api/[controller]/{id}")]
-        [AllowAnonymous]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             _categoryService.Delete(id);

@@ -8,11 +8,12 @@
               <!--LOGO-->
               <div class="logo text-center">
                 <img src="../../../assets/img/brand/logo.svg" alt="">
+                <h3 style="color: black; padding-top: 10px;">Nuovo Admin</h3>
                 <!-- <img src="../../../assets/img/brand/logo.png" alt=""> -->
               </div>
 
               <!--NOME-->
-              <div class="input-group mb-3 mt-5">
+              <div class="input-group mb-3 mt-3">
                 <input type="text" class="form-control" placeholder="Nome" id="name" formControlName="name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                 <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                   <div *ngIf="f.name.errors.required">Inserici il nome</div>
@@ -46,18 +47,22 @@
               <!--RIPETI PASSWORD-->
               <div class="input-group mb-4">
                 <input type="password" class="form-control" placeholder="Ripeti password" id="repeatPassword" formControlName="repeatPassword"
-                [ngClass]="{ 'is-invalid': submitted && f.repeatPassword.errors }">
-                  <div *ngIf="submitted && f.repeatPassword.errors" class="invalid-feedback">
-                    <div *ngIf="f.repeatPassword.errors.required">Inserici la password</div>
+                [ngClass]="{ 'is-invalid': submitted && (f.repeatPassword.errors || registerForm.errors) }">
+                  <div *ngIf="submitted" class="invalid-feedback">
+                    <div *ngIf="f.repeatPassword.errors && f.repeatPassword.errors.required">Inserici la password</div>
+                    <div *ngIf="registerForm.errors?.differentTypedPasswords && f.password.dirty && f.repeatPassword.dirty && !(f.repeatPassword.errors && f.repeatPassword.errors.required)">Password differente</div>
                   </div>
               </div>
+              
+
+              
 
               <!--CREA ACCOUNT-->
-              <button type="submit" class="btn btn-block btn-success text-uppercase mt-5">Crea Account</button>
+              <button type="submit" class="btn btn-block btn-success text-uppercase mt-5">Crea Admin</button>
               
-              <!--ACCEDI-->
+              <!--RITORNA ALL'APP-->
               <div class="text-center">
-                <button [routerLink]="['/login']" type="button" class="btn btn-link">Hai già un account? Accedi</button>
+                <button [routerLink]="['/public-home']" type="button" class="btn btn-link">Ritorna all'app</button>
               </div>
             </form>
           </div>

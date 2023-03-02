@@ -50,7 +50,7 @@ export class AuthService {
   logout() {
     this.loggedIn.next(false);
     localStorage.removeItem(CURRENT_TOKEN_NAME);
-    this.router.navigate(['/login']);
+    this.router.navigate(['/public-home/articles']);
   }
 
   /**
@@ -60,13 +60,13 @@ export class AuthService {
    * @param email Email dell'utente da registrare
    * @param password Password dell'utente da registrare
    */
-  register(name: string, surname: string, email: string, password: string): Promise<any> {
+  register(name: string, surname: string, email: string, password: string) {
     let user: UserDTO = new UserDTO();
     user.Name = name;
     user.Surname = surname;
     user.Email = email;
     user.Password = password;
-
+    
     return this.http.post<any>(environment.apiUrl + '/api/auth/register', user).toPromise();
   }
 

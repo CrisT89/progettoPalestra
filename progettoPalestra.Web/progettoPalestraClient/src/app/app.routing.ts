@@ -40,6 +40,7 @@ export const routes: Routes = [
   {
     path: 'changePassword',
     component: ChangePasswordComponent,
+    canActivate: [AuthGuard],
     data: {
       breadcrumbs: 'Change Password'
     }
@@ -47,6 +48,7 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+    canActivate: [AuthGuard],
     data: {
       breadcrumbs: 'Register Page'
     }
@@ -54,6 +56,7 @@ export const routes: Routes = [
   {
     path: 'forgot',
     component: ForgotComponent,
+    canActivate: [AuthGuard],
     data: {
       breadcrumbs: 'Errore 404'
     }
@@ -61,21 +64,24 @@ export const routes: Routes = [
   {
     path: '',
     component: DefaultLayoutComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: {
       breadcrumbs: 'Home'
     },
     children: [
       {
         path: 'dashboard',
+        canActivate: [AuthGuard],
         loadChildren: () => import('./components/dashboard/dashboard.module').then(m => m.DashboardModule)
       },
       {
         path: 'core',
+        canActivate: [AuthGuard],
         loadChildren: () => import('./components/core/core.module').then(m => m.CoreModule)
       },
       {
         path: 'profile',
+        canActivate: [AuthGuard],
         component: ProfileComponent,
         data: {
           breadcrumbs: 'Profilo utente'
@@ -84,6 +90,7 @@ export const routes: Routes = [
       {
         path: 'list-notifications',
         component: ListNotificationsComponent,
+        canActivate: [AuthGuard],
         data: {
           breadcrumbs: 'NOTIFICHE',
         }
@@ -91,6 +98,7 @@ export const routes: Routes = [
       {
         path: 'test',
         component: TestComponent,
+        canActivate: [AuthGuard],
         data: {
           breadcrumbs: 'Test'
         }
@@ -98,6 +106,7 @@ export const routes: Routes = [
       {
         path: 'categories',
         component: ListCategoryComponent,
+        canActivate: [AuthGuard],
         data: {
           breadcrumbs: 'Categorie'
         }
@@ -105,6 +114,7 @@ export const routes: Routes = [
       {
         path: 'newcategory',
         component: AddCategoryComponent,
+        canActivate: [AuthGuard],
         data: {
           breadcrumbs: 'Nuova Categoria'
         }
@@ -112,6 +122,7 @@ export const routes: Routes = [
       {
         path: 'newcategory/:id',
         component: AddCategoryComponent,
+        canActivate: [AuthGuard],
         data: {
           breadcrumbs: 'Modifica Categoria'
         }
@@ -119,6 +130,7 @@ export const routes: Routes = [
       {
         path: 'articles',
         component: ListArticleComponent,
+        canActivate: [AuthGuard],
         data: {
           breadcrumbs: 'Articoli'
         }
@@ -126,6 +138,7 @@ export const routes: Routes = [
       {
         path: 'newarticle',
         component: AddArticleComponent,
+        canActivate: [AuthGuard],
         data: {
           breadcrumbs: 'Nuovo Articolo'
         }
@@ -133,6 +146,7 @@ export const routes: Routes = [
       {
         path: 'newarticle/:id',
         component: AddArticleComponent,
+        canActivate: [AuthGuard],
         data: {
           breadcrumbs: 'Modifica Articolo'
         }

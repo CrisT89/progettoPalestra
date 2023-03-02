@@ -1,8 +1,8 @@
 <!--NAVBAR ORIZZONTALE-->
-<app-header class="background-color-secondary" [navbarBrandRouterLink]="['/dashboard']" [fixed]="true"
+<app-header class="background-color-secondary" [navbarBrandRouterLink]="['/public-home']" [fixed]="true"
   [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 89, height: 25, alt: 'Logo'}"
   [navbarBrandMinimized]="{src: 'assets/img/brand/icona-logo.svg', width: 30, height: 30, alt: 'Icona Logo'}"
-  [sidebarToggler]="'lg'" [asideMenuToggler]="false" [ngStyle]="{ 'z-index':'1000' }">
+  [sidebarToggler]="isAdmin ? 'lg' : false" [asideMenuToggler]="false" [ngStyle]="{ 'z-index':'1000' }">
 
 
   <!-- NAVIGAZIONE PUBBLICA -->
@@ -41,7 +41,7 @@
     </li>
 
     <!--NOTIFICATION-->
-    <li class="nav-item notification-dropdown" placement="bottom right">
+    <!-- <li class="nav-item notification-dropdown" placement="bottom right">
       <button mat-icon-button matMenuTrigger [matMenuTriggerFor]="notificationMenu" (click)="$event.stopPropagation();">
         <i class="fa fa-bell" style="font-size: 25px !important; color: white;">
         </i>
@@ -49,26 +49,26 @@
       </button>
       <mat-menu class="notification-dropdown" #notificationMenu="matMenu">
         <button class="text-center" mat-menu-item disabled>
-          <strong>Elenco notifiche</strong>
+          <strong>Elenco notifiche</strong> -->
           <!-- <strong>{{ 'MAIN.NOTIFICATIONS' | translate }}</strong> -->
-        </button>
+        <!-- </button>
         <button mat-menu-item *ngFor="let notification of notificationList"
           (click)="$event.stopPropagation(); readNotification(notification)">
           <mat-icon class="notification-icon" *ngIf="!notification.ReadDate">lens</mat-icon>
           <span>
-            {{ notification.Notification.Title }}
+            {{ notification.Notification.Title }} -->
             <!-- {{ notification.Notification.TitleTranslationKey | translate }} -->
-          </span>
+          <!-- </span>
         </button>
         <button class="text-center" mat-menu-item (click)="goToNotificationList()">
-          <strong>Mostra tutto...</strong>
+          <strong>Mostra tutto...</strong> -->
           <!-- <strong>{{ 'GENERIC_LABEL.SHOW_ALL' | translate }}</strong> -->
-        </button>
+        <!-- </button>
       </mat-menu>
-    </li>
+    </li> -->
 
-    <!--USER-->
-    <li class="nav-item dropdown" dropdown placement="bottom right">
+    <!--ADMIN USER-->
+    <li class="nav-item dropdown" dropdown placement="bottom right" *ngIf="isAdmin">
       <!--USER AVATAR-->
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
         dropdownToggle (click)="false">
@@ -81,18 +81,31 @@
         <!--PROFILO-->
         <a class="dropdown-item pointer" (click)="viewProfile()"><i class="fa fa-user"></i>
           Profilo</a>
+        <!--REGISTRA NUOVO ADMIN-->
+        <a class="dropdown-item pointer" (click)="newAdmin()"><i class="fa fa-user-plus"></i>
+          Registra Admin</a>
         <!--LOGOUT-->
         <a class="dropdown-item pointer" (click)="logout()"><i class="fa fa-lock"></i>
           Logout</a>
       </div>
     </li>
+
+    <!--LOGIN ADMIN USER-->
+    <li *ngIf="!isAdmin">
+      <a mat-icon-button routerLink="/login" >
+        <i class="fa fa-user" 
+           style="font-size: 25px !important; color: white;"></i>
+        
+      </a>
+      
+    </li>
   </ul>
 </app-header>
 
 <!--NAVBAR/SIDEBAR VERTICALE-->
-<div class="app-body">
+<div class="app-body" >
   <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized"
-    (minimizedChange)="toggleMinimize($event)">
+    (minimizedChange)="toggleMinimize($event)" *ngIf="isAdmin">
     <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized">
     </app-sidebar-nav>
     <app-sidebar-minimizer></app-sidebar-minimizer>

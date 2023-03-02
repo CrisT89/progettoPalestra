@@ -1,5 +1,5 @@
 import { UserService } from './../../services/user.service';
-import { Component, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { navItems } from '../../_nav';
@@ -22,7 +22,7 @@ import { CartService } from '../../services/cart.service';
   templateUrl: './default-layout.component.html',
   styleUrls: ['./default-layout.component.scss']
 })
-export class DefaultLayoutComponent {
+export class DefaultLayoutComponent implements OnDestroy{
 
   currentUser: UserDTO;
   categoryList: CategoryDTO[];
@@ -41,6 +41,9 @@ export class DefaultLayoutComponent {
   dialogViewNotificationRef: MatDialogRef<TemplateRef<any>>;
   @ViewChild('dialogViewNotification', { static: false }) dialogViewNotification: TemplateRef<any>;
   selectedNotification: NotificationDetailDTO;
+
+  isAdmin = false;
+  sub: Subscription;
 
   /**
    * Nasconde la sidebar
@@ -62,7 +65,7 @@ export class DefaultLayoutComponent {
     private cartService: CartService
   ) {
     this.resetRouteReuseStrategy();
-    // this.currentUser = authService.getCurrentUser();
+    this.currentUser = authService.getCurrentUser();
     // console.log(this.currentUser);
     
   }
@@ -81,10 +84,12 @@ export class DefaultLayoutComponent {
     //Se si vuole avviare il sistema di notifiche ed è presente l'utente autenticato
     //allora avvia i servizi per la ricezione delle notifiche push
     if (this.enableNotificationSystem && this.authService.getCurrentUser() != null && this.authService.getCurrentUser() != undefined) {
-      this.initializeSocketNotificationConnection();
+      // this.initializeSocketNotificationConnection();
           }
     this.categoryService.getAllCategories().subscribe(categories =>this.categoryList = categories);
     this.cartService.cartListChanged.subscribe(res => this.cartArticleCount = this.cartService.articleCount);
+   this.sub =  this.authService.loggedIn.subscribe(res => this.isAdmin = res);
+    
   }
 
   reloadComponent() {
@@ -107,6 +112,12 @@ export class DefaultLayoutComponent {
    */
   viewProfile() {
     this.router.navigate(['/profile'], { relativeTo: this.activatedRoute });
+  }
+
+  newAdmin() {
+    this.router.navigate(["/register"]);
+    
+    
   }
 
   //#region Gestione Hub notifiche SignalR
@@ -255,4 +266,8 @@ export class DefaultLayoutComponent {
   }
 
   //#endregion
+
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
 }

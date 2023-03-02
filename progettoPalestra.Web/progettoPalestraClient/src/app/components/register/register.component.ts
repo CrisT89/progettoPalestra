@@ -1,8 +1,15 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
+
+const checkPasswords: ValidatorFn = (control: AbstractControl): ValidationErrors | null => 
+    {
+      const password = control.get("password");
+      const repeatedPassword = control.get("repeatPassword");
+      return password && repeatedPassword && password.value===repeatedPassword.value ? null : {differentTypedPasswords: true}
+    }
 
 @Component({
   selector: 'app-register',
@@ -24,10 +31,10 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       name: ['', Validators.required],
       surname: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       repeatPassword: ['', Validators.required]
-    });
+    },{validators: checkPasswords});
   }
 
   /**
@@ -48,18 +55,20 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-
+    
     this.authenticationService.register(this.f.name.value, this.f.surname.value, this.f.email.value, this.f.password.value)
       .then((resUser) => {
       
         // Registrazione effettuata con successo
-        this.router.navigate(['/']);
+        this.router.navigate(['/public-home']);
       })
       .catch((err) => {
         Swal.fire({
-          title: err,
+          title: err.message,
           icon: 'error',
         })
       });
   }
+
+   
 }

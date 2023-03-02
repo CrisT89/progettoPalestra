@@ -10,6 +10,7 @@ using progettoPalestra.Web.Mappings;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using progettoPalestra.Web.Mappings.ModelsDTO;
 
 namespace progettoPalestra.Web.Controllers
 {
@@ -20,12 +21,14 @@ namespace progettoPalestra.Web.Controllers
         private AuthService _authService;
         private AutoMappingService _mappingService;
         private JwtService _jwtService;
+        private UserService _userService;
 
-        public AuthController(AuthService authService, AutoMappingService mappingService, JwtService jwtService)
+        public AuthController(AuthService authService, AutoMappingService mappingService, JwtService jwtService, UserService userService)
         {
             _authService = authService;
             _mappingService = mappingService;
             _jwtService = jwtService;
+            _userService = userService;
             
         }
 
@@ -41,6 +44,15 @@ namespace progettoPalestra.Web.Controllers
             string token = _jwtService.PayloadToToken(payload);
 
             return new JsonResult(token);
+        }
+
+        [HttpPost, Route("/api/[controller]/register")]
+        public async Task<IActionResult> Register([FromBody] UserDTO userDto)
+        {
+            
+            User userToSave = _mappingService.CurrentMapper.Map<User>(userDto);
+            int userSavedID = _userService.Save(userToSave);
+            return Ok(userSavedID);
         }
     }
 }
