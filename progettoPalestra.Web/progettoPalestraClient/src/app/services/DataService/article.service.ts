@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+import { LinqFilterDTO, LinqPredicateDTO } from "@eqproject/eqp-filters";
 import { Observable, Subject } from "rxjs";
 import { tap } from "rxjs/operators";
 import { environment } from "../../../environments/environment";
@@ -16,6 +17,10 @@ export class ArticleService {
         return this.http.get<ArticleDTO[]>(environment.apiFullUrl + '/article/GetAllArticles');
     }
 
+    getFilteredArticles(linqPredicates: LinqPredicateDTO[]): Observable<ArticleDTO[]> {
+        return this.http.post<ArticleDTO[]>(environment.apiFullUrl + '/article/GetAllArticles', linqPredicates);
+    }
+    
     getById(id: number): Observable<ArticleDTO> {
         return this.http.get<ArticleDTO>(environment.apiFullUrl + '/article/' + id);
     }

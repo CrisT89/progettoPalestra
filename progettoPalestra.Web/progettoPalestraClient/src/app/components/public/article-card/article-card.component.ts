@@ -28,6 +28,7 @@ export class ArticleCardComponent implements OnInit, OnDestroy {
     .subscribe(res=>{this.category=res;
       this.categoryName=this.category.Name;
     });
+    
     // let inCartList = this.cartService.getList().some(element => element.ID===this.article.ID);
     this.articleCount = this.cartService.getArticleQuantity(this.article);
     

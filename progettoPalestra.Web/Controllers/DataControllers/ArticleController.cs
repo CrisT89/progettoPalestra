@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using EQP.EFRepository.Core.Helpers;
+using EQP.EFRepository.Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using progettoPalestra.Core.DAL.Models.Data;
 using progettoPalestra.Core.EntityService.DataService;
 using progettoPalestra.Web.Mappings;
+using progettoPalestra.Web.Mappings.ModelsDTO;
 using progettoPalestra.Web.Mappings.ModelsDTO.DataDTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace progettoPalestra.Web.Controllers.DataControllers
@@ -29,6 +34,19 @@ namespace progettoPalestra.Web.Controllers.DataControllers
         public async Task<IActionResult> GetAllArticles()
         {
             List<Article> articles = _articleService.GetAll().ToList();
+            List<ArticleDTO> articlesDto = _autoMappingService.CurrentMapper.Map<List<ArticleDTO>>(articles);
+            return Ok(articlesDto);
+        }
+
+        //Controller per articoli filtrati
+        [HttpPost, Route("/api/[controller]/GetAllArticles")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetAllArticles([FromBody] List<LinqPredicateDTO> filters = null)
+        {
+            List<LinqPredicate> predicates = _autoMappingService.CurrentMapper.Map<List<LinqPredicate>>(filters);
+            Expression<Func<Article,bool>> filter = LinqPredicateBuilder.CreatePredicateExpression<Article>(typeof(Article).Assembly, predicates);
+
+            List<Article> articles = _articleService.GetBy(filter);
             List<ArticleDTO> articlesDto = _autoMappingService.CurrentMapper.Map<List<ArticleDTO>>(articles);
             return Ok(articlesDto);
         }

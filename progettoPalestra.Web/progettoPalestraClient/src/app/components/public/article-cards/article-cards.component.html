@@ -1,5 +1,14 @@
 <!-- Tutti gli articoli -->
 <h3 *ngIf="category_Id">{{category_Name}}</h3>
+
+<div *ngIf="inAllArticles">
+    <!-- <div class="col-md-12"> -->
+        
+        <eqp-dynamic-filters [filtersConfig]="filters" (filtersSelected)="filtersSelected($event)" [usingMode]="2" [resultType]="2" [filterTitle]="'Ricerca Articoli'" ></eqp-dynamic-filters>
+    <!-- </div> -->
+    
+</div>
+
 <div class="public-container">
     
     <app-article-card
