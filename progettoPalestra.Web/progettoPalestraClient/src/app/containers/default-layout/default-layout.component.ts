@@ -86,6 +86,8 @@ export class DefaultLayoutComponent implements OnDestroy{
     if (this.enableNotificationSystem && this.authService.getCurrentUser() != null && this.authService.getCurrentUser() != undefined) {
       // this.initializeSocketNotificationConnection();
           }
+          this.cartService.fromLocalStorage();
+          this.cartArticleCount = this.cartService.getTotalCount();
     this.categoryService.getAllCategories().subscribe(categories =>this.categoryList = categories);
     this.cartService.cartListChanged.subscribe(res => this.cartArticleCount = this.cartService.articleCount);
    this.sub =  this.authService.loggedIn.subscribe(res => this.isAdmin = res);

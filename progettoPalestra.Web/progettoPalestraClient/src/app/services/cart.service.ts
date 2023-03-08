@@ -13,6 +13,8 @@ export interface cartArticle {
 @Injectable({ providedIn: 'root' })
 export class CartService {
 
+    public CART_LIST = "cart_List";
+
     public cartList: ArticleDTO[] = [];
     cartListChanged = new Subject<ArticleDTO[]>();
     articleAmountChanged = new Subject<void>();
@@ -59,6 +61,7 @@ export class CartService {
         this.cartTotalPrice += article.Price;
         this.cartList.push(article);
         this.cartListChanged.next(this.getList());
+        this.toLocalStorage(this.getList());
         this.articleAmountChanged.next();
     }
 
@@ -68,6 +71,7 @@ export class CartService {
         this.updateArticlePrice(article);
         this.cartTotalPrice += article.Price;
         this.cartListChanged.next(this.getList());
+        this.toLocalStorage(this.getList());
         this.articleAmountChanged.next();
     }
 
@@ -75,12 +79,13 @@ export class CartService {
         article.totalPrice = article.Price * article.quantity;
     }
 
-    decreaseQuantity(article: object) {
+    decreaseQuantity(article: ArticleDTO) {
         article['quantity'] -= 1;
         this.articleCount--;
-        //this.updateArticlePrice(article);
-        this.cartTotalPrice -= article['Price'];
+        this.updateArticlePrice(article);
+        this.cartTotalPrice -= article.Price;
         this.cartListChanged.next(this.getList());
+        this.toLocalStorage(this.getList());
         this.articleAmountChanged.next();
     }
 
@@ -90,6 +95,7 @@ export class CartService {
         this.articleCount -= removedQuantity;
         this.cartTotalPrice -= removedQuantity * removedArticle[0]['Price'];
         this.cartListChanged.next(this.getList());
+        this.toLocalStorage(this.getList());
         this.articleAmountChanged.next();
 
     }
@@ -108,6 +114,47 @@ export class CartService {
 
     inCartList(article: ArticleDTO) {
         return this.cartList.some((element: ArticleDTO)=>element.ID===article.ID);
+    }
+
+    toLocalStorage(cartList: ArticleDTO[]) {
+        var cartListEncoded = btoa(JSON.stringify(cartList));
+        localStorage.setItem(this.CART_LIST,cartListEncoded);
+        // console.log("localStorage modificato");
+        
+    }
+
+    fromLocalStorage() {
+        var cartListEncoded = localStorage.getItem(this.CART_LIST);
+        if (cartListEncoded != null)
+        {
+            this.cartList = JSON.parse(atob(cartListEncoded));
+            this.articleCount = this.getTotalCount();
+            this.cartTotalPrice = this.getTotalPrice();
+            // console.log(cartListDecoded);
+            
+            
+        } 
+            
+    }
+
+    getTotalCount() {
+        let count = 0;
+        this.cartList.forEach(article=> count = count + article.quantity);
+        return count;
+    }
+
+    getTotalPrice() {
+        let total = 0;
+        this.cartList.forEach(article=> total += article.totalPrice);
+        return total;
+    }
+
+    resetCart() {
+        this.cartList = [];
+        this.articleCount = 0;
+        this.cartTotalPrice = 0;
+        this.cartListChanged.next(this.getList());
+        this.articleAmountChanged.next();
     }
 
 }

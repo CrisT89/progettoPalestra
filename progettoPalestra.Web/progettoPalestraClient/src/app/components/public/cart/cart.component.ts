@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigColumn, TypeColumn } from '@eqproject/eqp-table';
 import { Subscription } from 'rxjs';
 import { ArticleDTO } from '../../../models/Data/article.model';
-import { cartArticle, CartService } from '../../../services/cart.service';
+import { CartService } from '../../../services/cart.service';
 
 
 
@@ -18,15 +19,23 @@ export class CartComponent implements OnInit, OnDestroy {
   sub: Subscription;
   cartTotalPrice: number;
 
-  constructor(private cartService: CartService) { }
+  listFromStorage: ArticleDTO[];
+
+  constructor(private cartService: CartService,
+              private router: Router) { }
 
   
 
   ngOnInit(): void {
+    // this.articleList = this.cartService.fromLocalStorage();
     this.configureColumns();
+    // console.log(this.articleList);
+    
     this.sub = this.cartService.cartListChanged
       .subscribe((res: ArticleDTO[]) => {
         this.articleList=res;
+        // this.cartService.toLocalStorage(res);
+        // this.cartService.fromLocalStorage();
         this.cartTotalPrice = this.cartService.cartTotalPrice;});
     this.articleList = this.cartService.getList(); 
     this.cartTotalPrice = this.cartService.cartTotalPrice; 
@@ -55,13 +64,20 @@ export class CartComponent implements OnInit, OnDestroy {
     // this.cartService.cartListChanged.next(this.articleList);
   }
 
-  onDecreaseQuantity(el: object) {
+  onDecreaseQuantity(el: ArticleDTO) {
     this.cartService.decreaseQuantity(el);
     // this.cartService.cartListChanged.next(this.articleList);
   }
 
   onRemove(index: number) {
     this.cartService.removeArticle(index);
+    
+  }
+
+  onCompletePurchase() {
+    localStorage.removeItem(this.cartService.CART_LIST);
+    this.cartService.resetCart();
+    this.router.navigate(["/public-home"]);
     
   }
 

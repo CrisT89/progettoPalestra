@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FilterConfig, FilterCvlConfig, InputType, LinqPredicateDTO, WherePartType } from '@eqproject/eqp-filters';
+import { map } from 'rxjs/operators';
 import { ArticleDTO } from '../../../models/Data/article.model';
 import { CategoryDTO } from '../../../models/Data/category.model';
 import { ArticleService } from '../../../services/DataService/article.service';
@@ -51,8 +52,8 @@ export class ArticleCardsComponent implements OnInit {
       if (evidence==null && id==null) {
         this.inByCategory = false;
         this.inAllArticles = true;
-        this.articleService.getAllArticles()
-        .subscribe(articles => this.articleList=articles);
+        this.articleService.getAllArticles().pipe(map(articles => this.prezzoIva(articles)))
+        .subscribe(res => this.articleList=res);
       }
       if (evidence=='inEvidence') {
         this.inByCategory = false;
@@ -68,7 +69,16 @@ export class ArticleCardsComponent implements OnInit {
       }
     }
 
-    
+    prezzoIva(articoli: ArticleDTO[]): ArticleDTO[] {
+      articoli.forEach(articolo => 
+        {
+          if (articolo.Iva) {
+            articolo.Price = articolo.Price*(1 + articolo.Iva / 100);
+          }
+
+        })
+        return articoli;
+    }
 
     configureFilters() {
 
