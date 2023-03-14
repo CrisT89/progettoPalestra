@@ -1,9 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ConfigColumn, TypeColumn } from '@eqproject/eqp-table';
 import { Subscription } from 'rxjs';
 import { ArticleDTO } from '../../../models/Data/article.model';
 import { CartService } from '../../../services/cart.service';
+import { CheckoutComponent } from '../../checkout/checkout.component';
 
 
 
@@ -19,10 +22,18 @@ export class CartComponent implements OnInit, OnDestroy {
   sub: Subscription;
   cartTotalPrice: number;
 
-  listFromStorage: ArticleDTO[];
+  checkoutForm: FormGroup;
+  displayedColumns: string[] = ['Name', 'quantity','totalPrice'];
+
+  nomeAquirente: string;
+
+  dialogCheckoutRef: MatDialogRef<CheckoutComponent>;
+  @ViewChild('CartCheckout', { static: false }) CartCheckout: TemplateRef<any>;
 
   constructor(private cartService: CartService,
-              private router: Router) { }
+              private router: Router,
+              private dialog: MatDialog,
+              private formBuilder: FormBuilder) { }
 
   
 
@@ -39,6 +50,7 @@ export class CartComponent implements OnInit, OnDestroy {
         this.cartTotalPrice = this.cartService.cartTotalPrice;});
     this.articleList = this.cartService.getList(); 
     this.cartTotalPrice = this.cartService.cartTotalPrice; 
+    
   }
 
   configureColumns() {
@@ -74,11 +86,50 @@ export class CartComponent implements OnInit, OnDestroy {
     
   }
 
+  selectedStepCounter: number = 0;
+  maxNumberOfSteps: number = 2;
+  
+  createForm() {
+    this.checkoutForm = this.formBuilder.group({
+      // addFormControlHere
+      Name: [
+        this.nomeAquirente, []
+      ],
+    });
+  }
+  
+  saveFunctionName(exit: boolean = true) {
+    const values: Object = this.checkoutForm.value;
+    /*bind the inserted values*/
+    if (exit) {
+      /* save */
+      this.exitFunctionName()
+    } else {
+      /* save */
+    }
+  
+    console.log(values, "save!");
+  }
+  
+  exitFunctionName() {
+    // this.location.back();
+  }
+
   onCompletePurchase() {
-    localStorage.removeItem(this.cartService.CART_LIST);
-    this.cartService.resetCart();
-    this.router.navigate(["/public-home"]);
-    
+    // localStorage.removeItem(this.cartService.CART_LIST);
+    // this.cartService.resetCart();
+    // this.router.navigate(["/public-home"]);
+
+    // this.createForm();
+
+
+    this.dialogCheckoutRef = this.dialog.open(CheckoutComponent, {
+      disableClose: true,
+      hasBackdrop: true,
+      autoFocus: false,
+      minWidth: '75%',
+      minHeight: '150px'
+    })
   }
 
   ngOnDestroy(): void {

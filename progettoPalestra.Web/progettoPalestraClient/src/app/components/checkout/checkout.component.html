@@ -1,0 +1,224 @@
+<h2 mat-dialog-title style="text-align: center;">Checkout Acquisto</h2>
+
+    <mat-horizontal-stepper linear #stepper>
+
+        <!-- RIEPILOGO CARRELLO -->
+        <mat-step completed="false">
+            <ng-template matStepLabel>Riepilogo Carrello</ng-template>
+            <div class="table-container">
+
+              <table mat-table [dataSource]="articleList" class="mat-elevation-z8">
+                  <!-- Article Name Column -->
+                  <ng-container matColumnDef="Name">
+                    <th mat-header-cell *matHeaderCellDef class="stepper-label"> Articoli </th>
+                    <td mat-cell *matCellDef="let article"> {{article.Name}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="stepper-label"> Totale: </td>
+                  </ng-container>
+  
+                  <!-- Article Quantity Column -->
+                  <ng-container matColumnDef="quantity">
+                    <th mat-header-cell *matHeaderCellDef class="stepper-label"> Quantità </th>
+                    <td mat-cell *matCellDef="let article" > {{article.quantity}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="stepper-label"></td>
+                  </ng-container>
+                
+                  <!-- Article Total Price Column -->
+                  <ng-container matColumnDef="totalPrice">
+                    <th mat-header-cell *matHeaderCellDef class="stepper-label"> Prezzo </th>
+                    <td mat-cell *matCellDef="let article"> {{article.totalPrice | currency: "EUR"}} </td>
+                    <td mat-footer-cell *matFooterCellDef class="stepper-label"> {{totalPrice | currency: "EUR"}} </td>
+                  </ng-container>
+                
+                  <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                  <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+                </table>
+            </div>
+              
+            <div class="mt-3">
+              <button mat-dialog-close mat-raised-button style="color: white; background-color: orange;" matStepperNext>Esci</button>
+              <button style="float: right;" mat-raised-button color="primary" (click)="complete()">Conferma carrello</button>
+            </div>
+        </mat-step>
+
+        <!-- FORM DATI ACQUIRENTE -->
+        <mat-step [stepControl]="checkoutForm">
+          <form [formGroup]="checkoutForm">
+            <ng-template matStepLabel>Dati di spedizione</ng-template>
+            <!-- PRIMA RIGA FORM -->
+            <div class="row">
+                <div class="col-3">
+                    <mat-form-field>
+                        <mat-label>Nome</mat-label>
+                        <input matInput formControlName="Name"
+                               required>
+                      </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <mat-form-field>
+                        <mat-label>Cognome</mat-label>
+                        <input matInput formControlName="Surname"
+                               required>
+                      </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <mat-form-field>
+                        <mat-label>Email</mat-label>
+                        <input matInput formControlName="Email"
+                               required>
+                      </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <mat-form-field>
+                        <mat-label>Telefono</mat-label>
+                        <input matInput formControlName="PhoneNumber"
+                               required>
+                      </mat-form-field>
+                </div>
+            </div>
+            <!-- SECONDA RIGA FORM -->
+            <div class="row">
+              <div class="col-4">
+                  <mat-form-field>
+                      <mat-label>Indirizzo di spedizione</mat-label>
+                      <input matInput formControlName="Adress"
+                             required>
+                    </mat-form-field>
+              </div>
+              <div class="col-2">
+                  <mat-form-field>
+                      <mat-label>Città</mat-label>
+                      <input matInput formControlName="City"
+                             required>
+                    </mat-form-field>
+              </div>
+              <div class="col-2">
+                  <mat-form-field>
+                      <mat-label>Cap</mat-label>
+                      <input matInput formControlName="CAP"
+                             required>
+                    </mat-form-field>
+              </div>
+              <div class="col-2">
+                  <mat-form-field>
+                      <mat-label>Provincia</mat-label>
+                      <input matInput formControlName="Province"
+                             required>
+                    </mat-form-field>
+              </div>
+              <div class="col-2">
+                  <mat-form-field>
+                      <mat-label>Stato</mat-label>
+                      <input matInput formControlName="State"
+                             required>
+                    </mat-form-field>
+              </div>
+          </div>
+          <div class="row date-row">
+            <div class="col-4">
+              <mat-checkbox [(ngModel)]="datePickerCheck" [ngModelOptions]="{standalone: true}">Preferenza giorno ricezione</mat-checkbox>
+              <!-- <button mat-raised-button (click)="picker.open()">Open</button> -->
+            </div>
+            <div class="col-3">
+              <mat-form-field [ngClass]="{'noDate': !datePickerCheck}" >
+                <mat-label>Giorno ricezione</mat-label>
+                <input matInput [matDatepicker]="picker" 
+                        formControlName="DatePicker" 
+                        (click)="picker.open()"
+                        [min]="minDate"
+                        [max]="maxDate">
+                <!-- <mat-datepicker-toggle style= "float: right; display: inline;" matIconSuffix [for]="picker"></mat-datepicker-toggle> -->
+                <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+
+            </div>
+<!-- <ngx-mat-timepicker></ngx-mat-timepicker> -->
+
+          </div>
+            <div class="mt-3">
+                <button mat-dialog-close mat-raised-button style="color: white; background-color: orange;">Esci</button>
+                <!-- <button mat-button type="button" (click)="suConsole()">Console</button> -->
+                <button mat-button type="button" (click)="dummyCustomer()">Cliente Dummy</button>
+
+                <!-- <button style="float: right;" mat-raised-button color="warn" matStepperPrevious>Torna indietro</button> -->
+                <button style="float: right;" mat-raised-button color="primary" (click)="submit()" matStepperNext>Prosegui</button>
+              </div>
+            
+          </form>
+        </mat-step>
+
+        <!-- RIEPILOGO FINALE -->
+        <mat-step>
+          <ng-template matStepLabel>Riepilogo</ng-template>
+          <div class="riepilogo-finale">
+            <hr>
+            <div class="row">
+              <div class="col-4 key">
+                <p>Destinatario:</p>
+              </div>
+              <div class="col-8 value">
+                <p>{{customer.Name + " " + customer.Surname}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4 key">
+                <p>Telefono:</p>
+              </div>
+              <div class="col-8 value">
+                <p>{{customer.PhoneNumber}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-4 key">
+                <p>Indirizzo di spedizione:</p>
+              </div>
+              <div class="col-8 value">
+                <p>{{customer.Adress + " - " + customer.City + ", " + customer.Cap + ", " + customer.State}}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row" *ngIf="customer.ReceptionDate">
+              <div class="col-4 key">
+                <p>Giorno preferenziale di ricezione:</p>
+              </div>
+              <div class="col-8 value">
+                <p>{{customer.ReceptionDate | date: 'fullDate'}}</p>
+              </div>
+            </div>
+            <hr *ngIf="customer.ReceptionDate">
+            <div class="row">
+              <div class="col-4 key">
+                <p>Totale acquisto:</p>
+              </div>
+              <div class="col-8 value">
+                <p>{{totalPrice | currency: 'EUR'}}</p>
+              </div>
+            </div>
+            <hr>
+          </div>
+          
+          <div>
+            <button mat-dialog-close mat-raised-button style="color: white; background-color: orange;" matStepperNext>Esci</button>
+
+            <button mat-raised-button color="primary" matStepperPrevious>Modifica Dati</button>
+            <button mat-raised-button mat-dialog-close style="float: right;" color="primary" (click)="onComplete()">Conferma Acquisto</button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+      
+
+
+
+
+
+      <!-- MODALE DATEPICKER -->
+<!-- <ng-template #datePicker>
+    <h2 mat-dialog-title>Checkout Acquisto</h2>
+    <mat-datepicker #picker></mat-datepicker>
+
+    
+      
+ </ng-template>  -->

@@ -1,0 +1,52 @@
+table {
+    width: 100%;
+  }
+  
+  .stepper-label {
+    font-weight: bolder;
+    color: black;
+  }
+
+
+th.mat-header-cell, td.mat-cell, td.mat-footer-cell { 
+    text-align: center; 
+}
+
+.table-container {
+  width: 100%;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.noDate {
+display: none;
+}
+
+.date-row {
+  display: flexbox;
+  align-items: center;
+}
+
+.showDate {
+ margin-right: 12px;
+}
+
+.riepilogo-finale p {
+  font-size: large;
+  margin-bottom: 0;
+}
+
+.key p {
+  font-weight: bold;
+}
+
+.value p {
+  float: right;
+  
+}
+
+/* .value {
+  vertical-align:baseline;
+
+} */
+

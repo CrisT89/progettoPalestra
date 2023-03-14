@@ -32,7 +32,7 @@
 
     <!-- CARRELLO -->
     <li >
-      <a mat-icon-button routerLink="/public-home/cart" [ngClass]="{disabled: cartArticleCount==0}">
+      <a mat-icon-button style="margin-right: 10px;" routerLink="/public-home/cart" [ngClass]="{disabled: cartArticleCount==0}">
         <i class="fa fa-shopping-cart" 
            style="font-size: 25px !important; color: white;"></i>
         <span class="badge badge-info cart" *ngIf="cartArticleCount>0">{{cartArticleCount}}</span>
