@@ -25,6 +25,10 @@ export class ArticleService {
         return this.http.get<ArticleDTO>(environment.apiFullUrl + '/article/' + id);
     }
 
+    getByWithCategory(id: number): Observable<ArticleDTO> {
+        return this.http.get<ArticleDTO>(environment.apiFullUrl + '/article/GetWithCategory/' + id);
+    }
+
     getInEvidence(): Observable<ArticleDTO[]>{
         return this.http.get<ArticleDTO[]>(environment.apiFullUrl + '/article/GetInEvidence');
     }

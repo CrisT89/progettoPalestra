@@ -65,6 +65,8 @@ namespace progettoPalestra.Core.DAL.Context
         public DbSet<User> Users { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Article> Articles { get; set; }
+        public DbSet<TestataOrdine> TestateOrdini { get; set; }
+        public DbSet<RigaOrdine> RigheOrdini { get; set; }
 
         #region NotificationCenter
         public DbSet<Notification> Notifications { get; set; }
@@ -127,6 +129,8 @@ namespace progettoPalestra.Core.DAL.Context
             modelBuilder.ApplyConfiguration(new UserConfigurations());
             modelBuilder.ApplyConfiguration(new CategoryConfigurations());
             modelBuilder.ApplyConfiguration(new ArticleConfigurations());
+            modelBuilder.ApplyConfiguration(new TestataOrdineConfigurations());
+            modelBuilder.ApplyConfiguration(new RigaOrdineConfigurations());
             #region FluentAPI per entità NotificationCenter
             modelBuilder.ApplyConfiguration(new NotificationConfigurations());
             modelBuilder.ApplyConfiguration(new NotificationDetailConfigurations());

@@ -49,6 +49,7 @@ export class ListArticleComponent implements OnInit, OnDestroy {
         key: "action", display: "",
         type: TypeColumn.MenuAction, buttonMenuIcon: "more_vert", styles: { flex: "0 0 6%" },
         actions: [
+          { name: "Console", icon: "create", fn: (element, index, col) => this.writeArticle(element), disabled: false, hidden: false },
           { name: "Modifica", icon: "create", fn: (element, index, col) => this.editArticle(element), disabled: false, hidden: false },
           { name: "Elimina", icon: "delete", fn: (element, index, col) => this.deleteArticle(element), disabled: false, hidden: false },
         ],
@@ -59,6 +60,13 @@ export class ListArticleComponent implements OnInit, OnDestroy {
   editArticle(element: ArticleDTO) {
     //indirizzamento verso add-article.component in modalità edit
     this.router.navigate(['/newarticle', element.ID]);
+  }
+  writeArticle(element: ArticleDTO) {
+    //indirizzamento verso add-article.component in modalità edit
+    this.articleService.getByWithCategory(element.ID).subscribe(res => console.log(res));
+    
+    // console.log(element);
+    
   }
 
   deleteArticle(element: ArticleDTO) {

@@ -5,8 +5,10 @@ using progettoPalestra.Core.DAL.Models.Data;
 using progettoPalestra.Core.EntityService.DataService;
 using progettoPalestra.Web.Mappings;
 using progettoPalestra.Web.Mappings.ModelsDTO.DataDTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace progettoPalestra.Web.Controllers.DataControllers
@@ -41,6 +43,17 @@ namespace progettoPalestra.Web.Controllers.DataControllers
             CategoryDTO categoryDto = _autoMappingService.CurrentMapper.Map<CategoryDTO>(category);
             return Ok(categoryDto);
         }
+
+        //[HttpGet("/api/[controller]/inc/{id}")]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> GetWithInclude(int id)
+        //{
+        //    Expression<Func<Category, object>> includes = c =>c.Articles;
+            
+        //    Category category = _categoryService.Get(id, includes);
+        //    CategoryDTO categoryDto = _autoMappingService.CurrentMapper.Map<CategoryDTO>(category);
+        //    return Ok(categoryDto);
+        //}
 
         [HttpPost, Route("/api/[controller]")]
         public async Task<IActionResult> SaveCategory([FromBody] CategoryDTO categoryDto)

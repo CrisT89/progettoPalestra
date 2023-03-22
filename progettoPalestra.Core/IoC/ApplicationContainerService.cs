@@ -91,6 +91,8 @@ namespace progettoPalestra.Core.IoC
             builder.RegisterType<UserService>().AsSelf();
             builder.RegisterType<CategoryService>().AsSelf();
             builder.RegisterType<ArticleService>().AsSelf();
+            builder.RegisterType<TestataOrdineService>().AsSelf();
+            builder.RegisterType<RigaOrdineService>().AsSelf();
 
             #region Servizi per entità NotificationCenter
             builder.RegisterType<NotificationService>().AsSelf();

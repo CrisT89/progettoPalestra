@@ -22,6 +22,10 @@ export class CategoryService {
         return this.http.get<CategoryDTO>(environment.apiFullUrl + '/category/' + id);
     }
 
+    getInc(id: number): Observable<CategoryDTO> {
+        return this.http.get<CategoryDTO>(environment.apiFullUrl + '/category/inc/' + id);
+    }
+
     saveCategory(category: CategoryDTO): Observable<any> {
         return this.http.post<any>(environment.apiFullUrl + '/category', category)
             .pipe(tap(() => { this.categoryListChanged.next(); }));

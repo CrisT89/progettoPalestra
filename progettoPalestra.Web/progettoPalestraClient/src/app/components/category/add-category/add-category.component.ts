@@ -69,7 +69,8 @@ export class AddCategoryComponent implements OnInit {
   }
 
   suConsole() {
-    //this.catTest.Name = "Cris";
-    console.log(this.category);
+    // var cat: CategoryDTO;
+    // this.categoryService.getInc(this.idParam).subscribe(res => console.log(res));
+    // console.log(cat);
   }
 }

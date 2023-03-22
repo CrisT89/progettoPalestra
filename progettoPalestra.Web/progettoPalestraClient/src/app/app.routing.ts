@@ -56,7 +56,7 @@ export const routes: Routes = [
   {
     path: 'forgot',
     component: ForgotComponent,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     data: {
       breadcrumbs: 'Errore 404'
     }

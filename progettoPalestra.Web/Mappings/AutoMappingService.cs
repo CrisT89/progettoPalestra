@@ -15,6 +15,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using progettoPalestra.Core.DAL.Models.Data;
 using progettoPalestra.Web.Mappings.ModelsDTO.DataDTO;
+using progettoPalestra.Web.Mappings.Profiles;
 
 namespace progettoPalestra.Web.Mappings
 {
@@ -111,6 +112,8 @@ namespace progettoPalestra.Web.Mappings
                 #region Importazione profili di mapping
 
                 cfg.AddProfile<UserProfile>();
+                cfg.AddProfile<TestataOrdineProfile>();
+                cfg.AddProfile<RigaOrdineProfile>();
 
                 #endregion
             });

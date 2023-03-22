@@ -3,9 +3,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MatHorizontalStepper } from '@angular/material/stepper';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ArticleDTO } from '../../models/Data/article.model';
-import { CustomerDTO } from '../../models/Data/cliente.model';
+import { RigaOrdineDTO } from '../../models/Data/riga-ordine.model';
+import { TestataOrdineDTO } from '../../models/Data/testata-ordine.model';
 import { CartService } from '../../services/cart.service';
+import { OrderService } from '../../services/order.service';
 
 @Component({
   selector: 'app-checkout',
@@ -23,9 +27,10 @@ export class CheckoutComponent implements OnInit {
 
   articleList: ArticleDTO[];
   totalPrice: number;
+  righeOrdine: RigaOrdineDTO[] = [];
 
   // nomeAquirente: string;
-  customer: CustomerDTO = new CustomerDTO();
+  customer: TestataOrdineDTO = new TestataOrdineDTO();
 
   @ViewChild(MatHorizontalStepper) stepper: MatHorizontalStepper
 
@@ -35,7 +40,9 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private cartService: CartService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog,
+              private orderService: OrderService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.articleList = this.cartService.getList();
@@ -88,7 +95,7 @@ export class CheckoutComponent implements OnInit {
         [Validators.required],
       ],
       DatePicker: [
-        this.customer.ReceptionDate
+        this.customer.PreferredDate
       ]
     
     });
@@ -117,9 +124,9 @@ export class CheckoutComponent implements OnInit {
     this.customer.State = values['State'];
     if (this.datePickerCheck && values['DatePicker']) 
     {
-      this.customer.ReceptionDate = values['DatePicker'];
+      this.customer.PreferredDate = values['DatePicker'];
     } else {
-      this.customer.ReceptionDate = null;
+      this.customer.PreferredDate = null;
     }
     
     // console.log(this.customer);
@@ -129,7 +136,7 @@ export class CheckoutComponent implements OnInit {
   dummyCustomer() {
     this.customer.Name = "Cris";
     this.customer.Surname = "Dummy";
-    this.customer.Email = "cris@test.it";
+    this.customer.Email = "cris.varie.89@gmail.com";
     this.customer.PhoneNumber = "123456789";
     this.customer.Adress = "via libera tutti, 1";
     this.customer.City = "Ascoli Piceno";
@@ -137,7 +144,9 @@ export class CheckoutComponent implements OnInit {
     this.customer.Province = "AP";
     this.customer.State = "Italia";
 
-    this.createForm();    
+    this.createForm(); 
+    // this.orderService.getById(2).subscribe(res => console.log(res));
+      
   }
 
   // openDatePicker() {
@@ -152,8 +161,49 @@ export class CheckoutComponent implements OnInit {
   // }
 
   onComplete() {
-    console.log(this.customer);
+    this.righeOrdine = this.creaRighe(this.articleList);
+    this.customer.RigheOrdine = this.righeOrdine;
+    this.customer.OrderTotal = this.totalPrice;
+    this.customer.Status = 1;
+    this.customer.OrderDate = new Date();
+    this.orderService.saveOrder(this.customer)
+    .subscribe(res => {
+      Swal.fire({
+        title: "Operazione Completata!",
+        html: "Ordine completato con successo. Una mail di riepilogo è stata inviata all'indirizzo indicato.",
+        icon: 'success',
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        confirmButtonText: "OK",
+        preConfirm: ()=> {
+          this.cartService.resetCart();
+          this.router.navigate(["public-home/articles"]);
+          console.log("OK");
+          
+        }
+      });
+    });
+      
+    // console.log(this.customer);
     
+  }
+
+  creaRighe(articleList: ArticleDTO[]): RigaOrdineDTO[] {
+    let righe: RigaOrdineDTO[] = [];
+    articleList.forEach(article => {
+      let riga = new RigaOrdineDTO();
+      riga.Quantity = article.quantity;
+      riga.UnitaryPrice = article.Price;
+      if (article.Iva) {
+        riga.Iva = article.Iva;
+      } else {
+        riga.Iva = 0;
+      }
+      riga.Total = article.totalPrice;
+      riga.FK_Article = article.ID;
+      righe.push(riga);
+    })
+    return righe;
   }
   
 

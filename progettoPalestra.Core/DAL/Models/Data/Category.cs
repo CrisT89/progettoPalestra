@@ -1,5 +1,6 @@
 ﻿using EQP.EFRepository.Core.Attributes;
 using EQP.EFRepository.Core.Interface;
+using Newtonsoft.Json;
 using progettoPalestra.Core.HelperService.LookupEntityService;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace progettoPalestra.Core.DAL.Models.Data
         public string Name { get; set; }
         public string Description { get; set; }
         public string Label { get; set; }
+        [JsonIgnore]
         public List<Article> Articles { get; set; } = new List<Article>();
 
         //Sezione Audit

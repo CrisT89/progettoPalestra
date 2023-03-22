@@ -180,15 +180,15 @@
               </div>
             </div>
             <hr>
-            <div class="row" *ngIf="customer.ReceptionDate">
+            <div class="row" *ngIf="customer.PreferredDate">
               <div class="col-4 key">
                 <p>Giorno preferenziale di ricezione:</p>
               </div>
               <div class="col-8 value">
-                <p>{{customer.ReceptionDate | date: 'fullDate'}}</p>
+                <p>{{customer.PreferredDate | date: 'fullDate'}}</p>
               </div>
             </div>
-            <hr *ngIf="customer.ReceptionDate">
+            <hr *ngIf="customer.PreferredDate">
             <div class="row">
               <div class="col-4 key">
                 <p>Totale acquisto:</p>

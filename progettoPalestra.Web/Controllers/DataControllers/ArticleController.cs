@@ -29,10 +29,15 @@ namespace progettoPalestra.Web.Controllers.DataControllers
             _autoMappingService = autoMappingService;
         }
 
+
+        
+
         [HttpGet, Route("/api/[controller]/GetAllArticles")]
         [AllowAnonymous]
         public async Task<IActionResult> GetAllArticles()
         {
+            
+
             List<Article> articles = _articleService.GetAll().ToList();
             List<ArticleDTO> articlesDto = _autoMappingService.CurrentMapper.Map<List<ArticleDTO>>(articles);
             return Ok(articlesDto);
@@ -56,6 +61,18 @@ namespace progettoPalestra.Web.Controllers.DataControllers
         public async Task<IActionResult> Get(int id)
         {
             Article article = _articleService.Get(id);
+            ArticleDTO articleDto = _autoMappingService.CurrentMapper.Map<ArticleDTO>(article);
+            return Ok(articleDto);
+        }
+
+        [HttpGet("/api/[controller]/GetWithCategory/{id}")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetWithCategory(int id)
+        {
+            //Expression<Func<Article, object>> includes = a => a.Category;
+
+            Article article = _articleService.Get(id, a => a.Category);
+            article.Category.Articles = null;
             ArticleDTO articleDto = _autoMappingService.CurrentMapper.Map<ArticleDTO>(article);
             return Ok(articleDto);
         }

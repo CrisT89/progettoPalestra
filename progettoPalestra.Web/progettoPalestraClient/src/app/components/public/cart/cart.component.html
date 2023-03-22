@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <button class="btn btn-primary" routerLink="/public-home/articles">Altri Articoli</button>
-        <button class="btn btn-success" (click)="onCompletePurchase()"  data-toggle="modal" data-target="#CartCheckout">Completa Acquisto</button>
+        <button class="btn btn-success" [disabled]="articleList.length == 0" (click)="onCompletePurchase()"  data-toggle="modal" data-target="#CartCheckout">Completa Acquisto</button>
         <h4 class="float-right">Totale: {{cartTotalPrice | number: '1.2-2'}}€</h4>
     </div>
     <!-- <div class="col-md-3">

@@ -57,6 +57,11 @@
                         <button type="submit" class="btn btn-primary btn-block px-4" [disabled]="loginForm.invalid">
                           Login
                         </button>
+                        
+                        <!--RITORNA-->
+                        <button type="button" [routerLink]="['/public-home', 'articles']" class="btn btn-primary btn-block px-4">
+                          Esci
+                        </button>
 
                         <!--PASSWORD DIMENTICATA-->
                         <div class="text-right">

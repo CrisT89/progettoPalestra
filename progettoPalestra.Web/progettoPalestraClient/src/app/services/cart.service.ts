@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { Router } from "@angular/router";
 import { Subject } from "rxjs";
 
 import { ArticleDTO } from "../models/Data/article.model";
@@ -21,7 +22,7 @@ export class CartService {
     public articleCount: number = 0;
     public cartTotalPrice: number = 0;
 
-    constructor() { }
+    constructor(private router: Router) { }
 
     addArticle(article: ArticleDTO) {
         let alreadyInList = this.inCartList(article);
@@ -97,6 +98,10 @@ export class CartService {
         this.cartListChanged.next(this.getList());
         this.toLocalStorage(this.getList());
         this.articleAmountChanged.next();
+        if (this.getList().length == 0) {
+            localStorage.removeItem(this.CART_LIST);
+            this.router.navigate(["public-home/articles"]);
+        }
 
     }
 
@@ -155,6 +160,7 @@ export class CartService {
         this.cartTotalPrice = 0;
         this.cartListChanged.next(this.getList());
         this.articleAmountChanged.next();
+        localStorage.removeItem(this.CART_LIST);
     }
 
 }
