@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding: 8px;
+            /*background-color: #dddddd;*/
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        Sommario dati di spedizione ordine <br />
+    </p>
+    <hr />
+    <p>
+        <b>Cliente:</b> ##SURNAME## ##NAME##<br />
+        <b>Telefono:</b> ##PHONE_NUMBER##<br />
+        <b>Indirizzo:</b> ##ADRESS##<br />
+        <b>Città:</b> ##CITY## (##PROVINCE##), ##CAP##, ##STATE##<br />
+        <b>Giorno scelto ricezione:</b> ##RECEPTION_DATE##<br />
+        <b>Totale (IVA inclusa):</b> ##TOTAL##<br />
+        <hr />
+    </p>
+    <table>
+        <tr>
+            <th>Articolo</th>
+            <th>Quantità</th>
+            <th>Prezzo</th>
+        </tr>
+        ##TABLE##
+    </table>
+</body>
+</html>

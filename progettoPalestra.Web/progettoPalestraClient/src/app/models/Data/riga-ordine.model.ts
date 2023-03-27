@@ -6,6 +6,7 @@ export class RigaOrdineDTO {
     UnitaryPrice: number;
     Iva: number;
     Total: number;
+    Name?: string
 
     Article: LookupDTO;
     FK_Article: number;

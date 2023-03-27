@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { ArticleDTO } from '../../models/Data/article.model';
 import { RigaOrdineDTO } from '../../models/Data/riga-ordine.model';
 import { TestataOrdineDTO } from '../../models/Data/testata-ordine.model';
+import { MailContact, MailMessageDTO } from '../../models/mailMessage.model';
 import { CartService } from '../../services/cart.service';
 import { OrderService } from '../../services/order.service';
 
@@ -129,7 +130,7 @@ export class CheckoutComponent implements OnInit {
       this.customer.PreferredDate = null;
     }
     
-    // console.log(this.customer);
+    console.log(this.customer.PreferredDate);
     
   }
 
@@ -167,7 +168,8 @@ export class CheckoutComponent implements OnInit {
     this.customer.Status = 1;
     this.customer.OrderDate = new Date();
     this.orderService.saveOrder(this.customer)
-    .subscribe(res => {
+    .subscribe(orderID => {
+      this.SendSummaryMail(this.customer, orderID);
       Swal.fire({
         title: "Operazione Completata!",
         html: "Ordine completato con successo. Una mail di riepilogo è stata inviata all'indirizzo indicato.",
@@ -201,10 +203,32 @@ export class CheckoutComponent implements OnInit {
       }
       riga.Total = article.totalPrice;
       riga.FK_Article = article.ID;
+      riga.Name = article.Name;
       righe.push(riga);
     })
     return righe;
   }
+
+  SendSummaryMail(ordine: TestataOrdineDTO, ID: number) {
+    let mail = new MailMessageDTO();
+
+    let recipient = new MailContact();
+    recipient.Name = ordine.Name;
+    recipient.Surname = ordine.Surname;
+    recipient.EmailAdress = ordine.Email;
+    mail.Recipient = recipient;
+
+    mail.Order = ordine;
+
+    mail.Subject = "Riepilogo ordine n. " + ID;
+    // mail.Body = "...elenco a";
+
+    this.orderService.sendMailToUser(mail).subscribe();
+  }
+
+  // SendAdminMail(ID: number) {
+
+  // }
   
 
 }

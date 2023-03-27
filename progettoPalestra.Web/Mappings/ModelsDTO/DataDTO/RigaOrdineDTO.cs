@@ -11,6 +11,7 @@ namespace progettoPalestra.Web.Mappings.ModelsDTO.DataDTO
         public decimal UnitaryPrice { get; set; }
         public decimal Iva { get; set; }
         public decimal Total { get; set; }
+        public string? Name { get; set; }
 
 
         public LookupDTO Article { get; set; }

@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { environment } from "../../environments/environment";
 import { TestataOrdineDTO } from "../models/Data/testata-ordine.model";
+import { MailMessageDTO } from "../models/mailMessage.model";
 
 @Injectable({providedIn: "root"})
 export class OrderService {
@@ -17,4 +18,11 @@ export class OrderService {
         return this.http.post<any>(environment.apiFullUrl + '/testataordine/', order);
     }
 
+    sendMailToUser(mail: MailMessageDTO): Observable<any> {
+        return this.http.post<any>(environment.apiFullUrl + "/testataordine/sendSummaryMail", mail);
+    }
+    
+    // sendMailToAdmin(ID: Number): Observable<any> {
+    //     return this.http.post<any>(environment.apiFullUrl + "/testataordine/MailToAdmin", ID);
+    // }
 }

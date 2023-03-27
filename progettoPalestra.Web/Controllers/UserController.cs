@@ -32,7 +32,7 @@ namespace progettoPalestra.Web.Controllers
 
 
         [HttpGet, Route("/api/[controller]/GetAllUsers")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> GetAllUsers()
         {
             List<User> users = _userService.GetAll().ToList();
@@ -52,7 +52,7 @@ namespace progettoPalestra.Web.Controllers
         }
 
         [HttpPost, Route("/api/[controller]")]
-        [AllowAnonymous]
+        //[AllowAnonymous]
         public async Task<IActionResult> SaveUser([FromBody] UserDTO userDto)
         {
             User userToSave = _autoMappingService.CurrentMapper.Map<User>(userDto);

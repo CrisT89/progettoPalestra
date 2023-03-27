@@ -61,7 +61,6 @@
     <Folder Include="progettoPalestraClient\src\app\directives\eqp-multilanguage-field\" />
     <Folder Include="progettoPalestraClient\src\assets\img\email\" />
     <Folder Include="logs\" />
-	<Folder Include="TemplateMail\" />
   </ItemGroup>
 
   <ItemGroup>
