@@ -20,7 +20,7 @@ export class TestataOrdineDTO {
     RigheOrdine: RigaOrdineDTO[];
 }
 
-enum StatusEnum {
+export enum StatusEnum {
     WAITING = 1,
     SHIPPED = 2,
     RECEIVED = 3

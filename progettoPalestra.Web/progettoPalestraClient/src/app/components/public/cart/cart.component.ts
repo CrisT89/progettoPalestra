@@ -28,7 +28,7 @@ export class CartComponent implements OnInit, OnDestroy {
   nomeAquirente: string;
 
   dialogCheckoutRef: MatDialogRef<CheckoutComponent>;
-  @ViewChild('CartCheckout', { static: false }) CartCheckout: TemplateRef<any>;
+  // @ViewChild('CartCheckout', { static: false }) CartCheckout: TemplateRef<any>;
 
   constructor(private cartService: CartService,
               private router: Router,

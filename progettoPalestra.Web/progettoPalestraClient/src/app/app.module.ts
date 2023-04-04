@@ -63,6 +63,8 @@ import { ArticleCardsComponent } from './components/public/article-cards/article
 import { ArticleCardComponent } from './components/public/article-card/article-card.component';
 import { CartComponent } from './components/public/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ListOrderComponent } from './components/order/list-order/list-order.component';
+import { DetailsOrderComponent } from './components/order/details-order/details-order.component';
 
 registerLocaleData(localeIt, 'it-IT');
 
@@ -110,6 +112,8 @@ registerLocaleData(localeIt, 'it-IT');
     ArticleCardComponent,
     CartComponent,
     CheckoutComponent,
+    ListOrderComponent,
+    DetailsOrderComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

@@ -1,0 +1,107 @@
+<h3 mat-dialog-title style="text-align: center;">Dettaglio Ordine No. {{data.ID}}</h3>
+
+<div class="riepilogo-finale">
+    <hr>
+    <div class="row">
+        <div class="col-4 key-value">
+            <p class="key">Nome:</p>
+            <p>{{order.Name}}</p>
+        </div>
+        <div class="col-4 key-value">
+            <p class="key">Cognome:</p>
+            <p>{{order.Surname}}</p>
+        </div>
+        <div class="col-4 key-value">
+            <p class="key">Data Ordine:</p>
+            <p>{{order.OrderDate | date: "shortDate"}}</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-8 key-value">
+            <p class="key">Mail:</p>
+            <p>{{order.Email}}</p>
+        </div>
+        <div class="col-4 key-value">
+            <p class="key">Telefono:</p>
+            <p>{{order.PhoneNumber}}</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-12 key-value">
+            <p class="key">Dati Spedizione:</p>
+            <p>{{datiSpedizione}}</p>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-6 key-value">
+            <p class="key">Giorno Ricezione:</p>
+            <p *ngIf="order.PreferredDate; else NoPreferredDate">{{order.PreferredDate | date: "shortDate"}}</p>
+            <ng-template #NoPreferredDate>
+                <p>Nessuna Scelta</p>
+            </ng-template>
+        </div>
+        <div class="col-6 key-value">
+            <p class="key">Orario Ricezione:</p>
+            <p>Nessuna Scelta</p>
+        </div>
+    </div>
+    <hr>
+
+    <div class="table-container">
+
+        <table mat-table [dataSource]="order.RigheOrdine" class="mat-elevation-z8">
+            
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef class="stepper-label"> Articolo </th>
+              <td mat-cell *matCellDef="let article"> {{article.Article.Label}} </td>
+              <!-- <td mat-footer-cell *matFooterCellDef class="stepper-label"> Totale: </td> -->
+            </ng-container>
+
+            
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef class="stepper-label"> Quantità </th>
+              <td mat-cell *matCellDef="let article" > {{article.Quantity}} </td>
+              <!-- <td mat-footer-cell *matFooterCellDef class="stepper-label"></td> -->
+            </ng-container>
+          
+            
+            <ng-container matColumnDef="totalPrice">
+              <th mat-header-cell *matHeaderCellDef class="stepper-label"> Prezzo </th>
+              <td mat-cell *matCellDef="let article"> {{article.Total | currency: "EUR"}} </td>
+              <!-- <td mat-footer-cell *matFooterCellDef class="stepper-label"> {{totalPrice | currency: "EUR"}} </td> -->
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            <!-- <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr> -->
+          </table>
+      </div>
+
+
+      <form (ngSubmit)="onSubmit()" #f="ngForm" [formGroup]="statusForm">
+    <div class="row last-row">
+        <div class="col-3 key-value">
+            <p class="key">Totale:</p>
+            <p>{{order.OrderTotal | currency: "EUR"}}</p>
+        </div>
+        <div class="col-4 key-value status">
+            <p class="key">Stato:</p>
+                <mat-form-field>
+                <mat-select class="st" [(value)]="statusValue" formControlName="Status">
+                    <mat-option [value]="index" *ngFor="let index of statusKeys">
+                        {{statusEnum[index]}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-5">
+            <button mat-raised-button color="primary">Salva ed Esci</button>
+        </div>
+    </div>
+</form>
+   
+  </div>
+  

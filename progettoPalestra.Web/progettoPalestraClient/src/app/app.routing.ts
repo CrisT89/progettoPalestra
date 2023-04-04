@@ -21,6 +21,7 @@ import { AddArticleComponent } from './components/article/add-article/add-articl
 import { HomeComponent } from './components/public/home/home.component';
 import { ArticleCardsComponent } from './components/public/article-cards/article-cards.component';
 import { CartComponent } from './components/public/cart/cart.component';
+import { ListOrderComponent } from './components/order/list-order/list-order.component';
 
 export const routes: Routes = [
   {
@@ -149,6 +150,14 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           breadcrumbs: 'Modifica Articolo'
+        }
+      },
+      {
+        path: 'orders',
+        component: ListOrderComponent,
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumbs: 'Ordini'
         }
       },
       {

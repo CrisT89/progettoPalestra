@@ -44,7 +44,7 @@ namespace progettoPalestra.Web.Controllers.DataControllers
         [AllowAnonymous]
         public async Task<IActionResult> GetAllOrders()
         {
-            List<TestataOrdine> ordini = _testataOrdineService.GetAllFull().ToList();
+            List<TestataOrdine> ordini = _testataOrdineService.GetAll().ToList();
             List<TestataOrdineDTO> ordiniDto = _autoMappingService.CurrentMapper.Map<List<TestataOrdineDTO>>(ordini);
             return Ok(ordiniDto);
         }
@@ -65,6 +65,15 @@ namespace progettoPalestra.Web.Controllers.DataControllers
             TestataOrdine orderToSave = _autoMappingService.CurrentMapper.Map<TestataOrdine>(orderDto);
             int orderSavedId = _testataOrdineService.SaveAndSendAdminMail(orderToSave);
             return Ok(orderSavedId);
+        }
+
+        [HttpPut, Route("/api/[controller]/{id}")]
+        public async Task<IActionResult> UpdateStatus(int id, [FromBody] int status)
+        {
+            TestataOrdine orderToUpdate = _testataOrdineService.Get(id);
+            orderToUpdate.Status = (StatusEnum)status;
+            int orderUpdatedId = _testataOrdineService.Save(orderToUpdate);
+            return Ok(orderUpdatedId);
         }
 
         [HttpPost, Route("/api/[controller]/sendSummaryMail")]

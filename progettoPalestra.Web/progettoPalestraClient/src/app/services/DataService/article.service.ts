@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { LinqFilterDTO, LinqPredicateDTO } from "@eqproject/eqp-filters";
+import { LinqPredicateDTO } from "@eqproject/eqp-filters";
 import { Observable, Subject } from "rxjs";
 import { tap } from "rxjs/operators";
 import { environment } from "../../../environments/environment";

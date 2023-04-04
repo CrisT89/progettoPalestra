@@ -1,0 +1,56 @@
+.riepilogo-finale p {
+    font-size:medium;
+    margin-bottom: 0;
+  }
+
+  .key-value {
+    display: flex;
+  }
+  
+  .key  {
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  
+   /* .st {
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+   
+  } */
+
+  .last-row {
+    display: flex;
+    align-items:baseline;
+  }
+
+  .status {
+    display:flex;
+   
+    overflow: hidden;
+    align-items: baseline;
+  } 
+
+  .table-container {
+    width: 100%;
+    max-height: 28vh;
+    overflow: auto;
+  }
+
+  table {
+    width: 100%;
+    max-height: 28vh;
+    overflow: auto;
+
+    /* height: 200px; */
+  }
+
+  .stepper-label {
+    font-weight: bolder;
+    color: black;
+  }
+
+
+th.mat-header-cell, td.mat-cell { 
+    /* text-align: center;  */
+}

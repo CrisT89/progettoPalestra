@@ -1,0 +1,28 @@
+.demo-table {
+    width: 100%;
+  }
+
+.table-container {
+    max-height: 68.5vh;
+  /* overflow-y:scroll; */
+}
+
+.label {
+    font-weight: bolder;
+    color: black;
+}
+
+th.mat-header-cell, td.mat-cell { 
+    text-align: center; 
+}
+
+.mat-row .mat-cell {
+  /* border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent; */
+  cursor: pointer;
+}
+
+.mat-row:hover .mat-cell {
+  background-color: #ddd;
+}
+
