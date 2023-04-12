@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using progettoPalestra.Core.DAL.Context;
 
@@ -11,9 +12,10 @@ using progettoPalestra.Core.DAL.Context;
 namespace progettoPalestra.Core.Migrations.MSSQL
 {
     [DbContext(typeof(MSSQL_DbContext))]
-    partial class MSSQL_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230412130033_Colonna_Time")]
+    partial class Colonna_Time
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,7 +90,7 @@ namespace progettoPalestra.Core.Migrations.MSSQL
 
                     b.HasIndex("FK_Category");
 
-                    b.ToTable("Articles", (string)null);
+                    b.ToTable("Articles");
                 });
 
             modelBuilder.Entity("progettoPalestra.Core.DAL.Models.Data.Category", b =>
@@ -128,7 +130,7 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Categories", (string)null);
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("progettoPalestra.Core.DAL.Models.Data.RigaOrdine", b =>
@@ -166,7 +168,7 @@ namespace progettoPalestra.Core.Migrations.MSSQL
 
                     b.HasIndex("FK_TestataOrdine");
 
-                    b.ToTable("RigheOrdini", (string)null);
+                    b.ToTable("RigheOrdini");
                 });
 
             modelBuilder.Entity("progettoPalestra.Core.DAL.Models.Data.TestataOrdine", b =>
@@ -230,7 +232,7 @@ namespace progettoPalestra.Core.Migrations.MSSQL
 
                     b.HasKey("ID");
 
-                    b.ToTable("TestateOrdini", (string)null);
+                    b.ToTable("TestateOrdini");
                 });
 
             modelBuilder.Entity("progettoPalestra.Core.DAL.Models.Generics.User", b =>
@@ -272,7 +274,7 @@ namespace progettoPalestra.Core.Migrations.MSSQL
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("progettoPalestra.Core.DAL.Models.NotificationCenter.Notification", b =>
@@ -299,7 +301,7 @@ namespace progettoPalestra.Core.Migrations.MSSQL
 
                     b.HasKey("ID");
 
-                    b.ToTable("Notifications", (string)null);
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("progettoPalestra.Core.DAL.Models.NotificationCenter.NotificationDetail", b =>
@@ -331,7 +333,7 @@ namespace progettoPalestra.Core.Migrations.MSSQL
 
                     b.HasIndex("FK_Receiver");
 
-                    b.ToTable("NotificationDetails", (string)null);
+                    b.ToTable("NotificationDetails");
 
                     b.HasCheckConstraint("CK_RECEIVER", "(FK_Receiver IS NOT NULL) OR (FK_Receiver IS NULL AND ReceiverEmail IS NOT NULL)");
                 });

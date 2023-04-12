@@ -30,6 +30,8 @@ namespace progettoPalestra.Core.DAL.Context.EntityConfigurations.DataConfigurati
             builder.Property(t => t.State).IsRequired();
             builder.Property(t => t.Status).IsRequired();
             builder.Property(t => t.PreferredDate).HasColumnType("date");
+            //builder.Property(t => t.PreferredTime).HasColumnType("time");
+
 
             builder.HasMany<RigaOrdine>(testata => testata.RigheOrdine)
                    .WithOne(riga => riga.TestataOrdine)

@@ -105,6 +105,16 @@ namespace progettoPalestra.Web.Controllers.DataControllers
             {
                 mailBody = mailBody.Replace("##RECEPTION_DATE##", "Nessuna preferenza scelta");
             }
+            if (message.Order.PreferredTime != null)
+            {
+                DateTime date = (DateTime)message.Order.PreferredTime;
+                mailBody = mailBody.Replace("##RECEPTION_TIME##", date.ToString("t"));
+
+            }
+            else
+            {
+                mailBody = mailBody.Replace("##RECEPTION_TIME##", "Nessuna preferenza scelta");
+            }
             mailBody = mailBody.Replace("##TOTAL##", message.Order.OrderTotal.ToString("C"));
 
             string space = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";

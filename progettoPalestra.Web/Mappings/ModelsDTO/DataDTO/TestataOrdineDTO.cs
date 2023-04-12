@@ -15,6 +15,7 @@ namespace progettoPalestra.Web.Mappings.ModelsDTO.DataDTO
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public DateTime? PreferredDate { get; set; }
+        public DateTime? PreferredTime { get; set; }
         public string Adress { get; set; }
         public int Cap { get; set; }
         public string City { get; set; }

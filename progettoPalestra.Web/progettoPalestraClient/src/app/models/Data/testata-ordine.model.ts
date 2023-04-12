@@ -9,7 +9,7 @@ export class TestataOrdineDTO {
     PhoneNumber: string;
     Email: string;
     PreferredDate?: Date;
-    ReceptionTime?: Date;
+    PreferredTime?: Date;
     Adress: string;
     Cap: number;
     City: string;

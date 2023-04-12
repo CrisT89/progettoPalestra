@@ -12,7 +12,11 @@
 @import '~ngx-toastr/toastr-bs4-alert';
 
 .timepicker-backdrop-overlay {
-  z-index: 1001 !important;
+  z-index: 5000 !important;
+}
+
+.timepicker-overlay {
+  z-index: 5000 !important;
 }
 
 .lookup-add-button {

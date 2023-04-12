@@ -1,4 +1,4 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDatepicker } from '@angular/material/datepicker';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -11,6 +11,7 @@ import { TestataOrdineDTO } from '../../models/Data/testata-ordine.model';
 import { MailContact, MailMessageDTO } from '../../models/mailMessage.model';
 import { CartService } from '../../services/cart.service';
 import { OrderService } from '../../services/order.service';
+import { NgxMatTimepickerComponent } from '@angular-material-components/datetime-picker';
 
 @Component({
   selector: 'app-checkout',
@@ -22,6 +23,7 @@ export class CheckoutComponent implements OnInit {
   checkoutForm: FormGroup;
   displayedColumns: string[] = ['Name', 'quantity','totalPrice'];
   datePickerCheck: boolean;
+  timePickerCheck: boolean;
   minDate: Date;
   maxDate: Date;
   
@@ -36,8 +38,8 @@ export class CheckoutComponent implements OnInit {
   @ViewChild(MatHorizontalStepper) stepper: MatHorizontalStepper
 
   dialogDatePickerRef: MatDialogRef<TemplateRef<any>>;
-  @ViewChild('datePicker', { static: false }) datePicker: TemplateRef<any>;
-  @ViewChild('picker', { static: false }) picker: MatDatepicker<Date>;
+  @ViewChild('picker', { static: false }) datePicker: MatDatepicker<Date>;
+  @ViewChild('timePicker', { static: false }) timePicker: any;
 
   constructor(private formBuilder: FormBuilder,
               private cartService: CartService,
@@ -97,6 +99,9 @@ export class CheckoutComponent implements OnInit {
       ],
       DatePicker: [
         this.customer.PreferredDate
+      ],
+      TimePicker: [
+        this.customer.PreferredTime
       ]
     
     });
@@ -123,14 +128,23 @@ export class CheckoutComponent implements OnInit {
     this.customer.Cap = values['CAP'];
     this.customer.Province = values['Province'];
     this.customer.State = values['State'];
+
     if (this.datePickerCheck && values['DatePicker']) 
     {
       this.customer.PreferredDate = values['DatePicker'];
     } else {
       this.customer.PreferredDate = null;
     }
+
+    if (this.timePickerCheck && values['TimePicker']) 
+    {
+      this.customer.PreferredTime = values['TimePicker'];
+    } else {
+      this.customer.PreferredTime = null;
+    }
     
-    console.log(this.customer.PreferredDate);
+    
+    console.log(this.customer);
     
   }
 
@@ -150,15 +164,25 @@ export class CheckoutComponent implements OnInit {
       
   }
 
-  // openDatePicker() {
-  //   this.dialogDatePickerRef = this.dialog.open(this.datePicker, {
-  //     disableClose: false,
-  //     hasBackdrop: true,
-  //     autoFocus: false,
-  //     minWidth: '50%',
-  //     minHeight: '150px'
-  //   });
-  //   this.picker.open();
+  onDateCheckChange(event) {
+    if (event.checked) {
+      this.datePicker.open();
+    }
+    
+  }
+
+  onTimeCheckChange(event) {
+    if (event.checked) {
+      this.timePicker.open();
+      // console.log(this.timePicker);
+      
+    }
+    
+  }
+
+  // onTimeChange(event) {
+  //   console.log(event, typeof event);
+    
   // }
 
   onComplete() {

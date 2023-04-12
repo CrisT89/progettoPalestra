@@ -45,7 +45,10 @@
         </div>
         <div class="col-6 key-value">
             <p class="key">Orario Ricezione:</p>
-            <p>Nessuna Scelta</p>
+            <p *ngIf="order.PreferredTime; else NoPreferredTime">{{order.PreferredTime | date: "H:mm"}}</p>
+            <ng-template #NoPreferredTime>
+                <p>Nessuna Scelta</p>
+            </ng-template>
         </div>
     </div>
     <hr>
