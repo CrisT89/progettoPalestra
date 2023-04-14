@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using progettoPalestra.Core.DAL.Context;
 
@@ -11,9 +12,10 @@ using progettoPalestra.Core.DAL.Context;
 namespace progettoPalestra.Core.Migrations.MSSQL
 {
     [DbContext(typeof(MSSQL_DbContext))]
-    partial class MSSQL_DbContextModelSnapshot : ModelSnapshot
+    [Migration("20230413155654_View_Article")]
+    partial class View_Article
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -235,29 +237,23 @@ namespace progettoPalestra.Core.Migrations.MSSQL
 
             modelBuilder.Entity("progettoPalestra.Core.DAL.Models.Data.vArticle", b =>
                 {
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FK_Category")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FK_TestataOrdine")
-                        .HasColumnType("int");
-
                     b.Property<int>("ID")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("OrderDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Quantity")
+                    b.Property<int>("NumeroAcquisti")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("UnitaryPrice")
+                    b.Property<DateTime?>("PrimoOrdine")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("TotaleImporto")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime?>("UltimoOrdine")
+                        .HasColumnType("datetime2");
 
                     b.ToView("vArticles");
                 });
