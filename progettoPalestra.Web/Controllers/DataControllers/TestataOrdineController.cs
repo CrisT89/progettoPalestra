@@ -44,7 +44,7 @@ namespace progettoPalestra.Web.Controllers.DataControllers
         [AllowAnonymous]
         public async Task<IActionResult> GetAllOrders()
         {
-            List<TestataOrdine> ordini = _testataOrdineService.GetAll().ToList();
+            List<TestataOrdine> ordini = _testataOrdineService.GetAll().OrderByDescending(o => o.ID).ToList();
             List<TestataOrdineDTO> ordiniDto = _autoMappingService.CurrentMapper.Map<List<TestataOrdineDTO>>(ordini);
             return Ok(ordiniDto);
         }

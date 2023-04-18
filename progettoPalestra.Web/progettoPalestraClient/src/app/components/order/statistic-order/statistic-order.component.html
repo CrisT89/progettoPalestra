@@ -1,0 +1,110 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6" style="position: sticky;">
+            <h4>Dati Statistici</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <!-- category lookup -->
+            <eqp-lookup [entityType]="'Category'" 
+            
+                        [(ngModelInput)]="category" 
+                        (valueSelected)="update()"
+                        placeholder="Seleziona la categoria"
+                        [appendToInput]="'body'">
+                    </eqp-lookup>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field >
+              <mat-label>Dal</mat-label>
+              <input  matInput [matDatepicker]="fromPicker" 
+                      [(ngModel)]="fromDate"
+                      (click)="fromPicker.open()"
+                      (dateChange)="update()" 
+                      [max]="untilDate"
+                      readonly>
+                <button class="clear" mat-icon-button (click)="onFromDateClear()">
+                    <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+                </button>
+              <mat-datepicker #fromPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        <div class="col-md-4">
+            <mat-form-field >
+              <mat-label>Fino a</mat-label>
+              <input  matInput [matDatepicker]="untilPicker" 
+                      [(ngModel)]="untilDate"
+                      (click)="untilPicker.open()" 
+                      (dateChange)="update()"
+                      [min]="fromDate"
+                      readonly>
+                <button class="clear" mat-icon-button (click)="onUntilDateClear()">
+                    <mat-icon matDatepickerToggleIcon>clear</mat-icon>
+                </button>
+              <mat-datepicker #untilPicker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        <!-- <div class="col-md-3">
+            <button class="apply" mat-raised-button  color="primary" (click)="onSubmit()">Filtra</button>
+        </div> -->
+    </div>
+
+    
+      <div class="container-fluid table-container">
+    
+      <table mat-table [dataSource]="statisticDataList" class="mat-elevation-z8 demo-table">
+        <!-- ID Column -->
+        <ng-container matColumnDef="ID">
+          <th mat-header-cell *matHeaderCellDef class="label"> ID </th>
+          <td mat-cell *matCellDef="let data"> {{data.ID}} </td>
+         
+        <!-- Name Column -->
+        </ng-container>
+        <ng-container matColumnDef="Nome">
+          <th mat-header-cell *matHeaderCellDef class="label"> Nome </th>
+          <td mat-cell *matCellDef="let data"> {{data.Nome}} </td>
+          
+        </ng-container>
+
+        <!-- Acquistati Column -->
+        <ng-container matColumnDef="Acquistati">
+          <th mat-header-cell *matHeaderCellDef class="label"> No. Acquistati </th>
+          <td mat-cell *matCellDef="let data" > {{data.TotaleAcquistati}} </td>
+          
+        </ng-container>
+
+        <!-- TotalImport Column -->
+        <ng-container matColumnDef="TotalImport">
+          <th mat-header-cell *matHeaderCellDef class="label"> Totale Importo </th>
+          <td mat-cell *matCellDef="let data" > {{data.TotaleImporto | currency: "EUR"}} </td>
+          
+        </ng-container>
+
+        <!-- FirstOrder Column -->
+        <ng-container matColumnDef="FirstOrder">
+          <th mat-header-cell *matHeaderCellDef class="label"> Data Primo Ordine </th>
+          <td mat-cell *matCellDef="let data" > {{data.PrimoOrdine}} </td>
+          
+        </ng-container>
+
+        <!-- DaysFromLast Column -->
+        <ng-container matColumnDef="DaysFromLast">
+          <th mat-header-cell *matHeaderCellDef class="label"> Giorni da Ultimo Ordine </th>
+          <td mat-cell *matCellDef="let data"> {{data.GiorniDaUltimoOrdine}} </td>
+          
+        </ng-container>
+      
+        
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row 
+            *matRowDef="let row; columns: displayedColumns;"></tr>
+        
+      </table>
+
+      
+    </div>
+
+</div>

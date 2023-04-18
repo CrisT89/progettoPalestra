@@ -144,7 +144,7 @@ export class CheckoutComponent implements OnInit {
     }
     
     
-    console.log(this.customer);
+    
     
   }
 
@@ -204,7 +204,7 @@ export class CheckoutComponent implements OnInit {
         preConfirm: ()=> {
           this.cartService.resetCart();
           this.router.navigate(["public-home/articles"]);
-          console.log("OK");
+          
           
         }
       });

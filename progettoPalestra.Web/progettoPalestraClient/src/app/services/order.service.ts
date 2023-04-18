@@ -5,6 +5,7 @@ import { environment } from "../../environments/environment";
 import {  TestataOrdineDTO } from "../models/Data/testata-ordine.model";
 import { MailMessageDTO } from "../models/mailMessage.model";
 import { tap } from "rxjs/operators";
+import { ArticleStatisticDTO } from "../models/Data/article-statistic";
 
 @Injectable({providedIn: "root"})
 export class OrderService {
@@ -37,4 +38,8 @@ export class OrderService {
     // sendMailToAdmin(ID: Number): Observable<any> {
     //     return this.http.post<any>(environment.apiFullUrl + "/testataordine/MailToAdmin", ID);
     // }
+
+    getStatistic(query: string): Observable<ArticleStatisticDTO[]> {
+        return this.http.get<ArticleStatisticDTO[]>(environment.apiFullUrl + "/vArticle/GetFromView" + query);
+    }
 }

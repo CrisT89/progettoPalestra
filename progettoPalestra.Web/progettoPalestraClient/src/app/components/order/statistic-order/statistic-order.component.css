@@ -1,0 +1,51 @@
+.demo-table {
+    width: 100%;
+  }
+/* 
+.table-container {
+    max-height: 68.5vh;
+} */
+
+.label {
+    font-weight: bolder;
+    color: black;
+}
+
+th.mat-header-cell, td.mat-cell { 
+    text-align: center; 
+}
+
+/* mat-datepicker-toggle {
+    display: inline-block !important;
+    width: 20px;
+} */
+
+.clear {
+    /* display: inline-block !important; */
+    width: 20px;
+    height: 20px;
+    /* position: relative !important; */
+    float: right !important;
+    /* top: -13px; */
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.54);
+}
+
+input {
+    width: 85%;
+}
+
+mat-icon  {
+    position:relative;
+    top:-11px;
+    left:-1px
+}
+
+.row {
+    display: flex;
+    align-items:flex-start;
+    
+}
+
+
+

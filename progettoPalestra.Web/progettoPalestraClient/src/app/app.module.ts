@@ -66,6 +66,7 @@ import { CartComponent } from './components/public/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { ListOrderComponent } from './components/order/list-order/list-order.component';
 import { DetailsOrderComponent } from './components/order/details-order/details-order.component';
+import { StatisticOrderComponent } from './components/order/statistic-order/statistic-order.component';
 
 registerLocaleData(localeIt, 'it-IT');
 
@@ -116,6 +117,7 @@ registerLocaleData(localeIt, 'it-IT');
     CheckoutComponent,
     ListOrderComponent,
     DetailsOrderComponent,
+    StatisticOrderComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

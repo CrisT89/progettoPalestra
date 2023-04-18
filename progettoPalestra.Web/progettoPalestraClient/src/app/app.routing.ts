@@ -22,6 +22,7 @@ import { HomeComponent } from './components/public/home/home.component';
 import { ArticleCardsComponent } from './components/public/article-cards/article-cards.component';
 import { CartComponent } from './components/public/cart/cart.component';
 import { ListOrderComponent } from './components/order/list-order/list-order.component';
+import { StatisticOrderComponent } from './components/order/statistic-order/statistic-order.component';
 
 export const routes: Routes = [
   {
@@ -158,6 +159,14 @@ export const routes: Routes = [
         canActivate: [AuthGuard],
         data: {
           breadcrumbs: 'Ordini'
+        }
+      },
+      {
+        path: 'statistics',
+        component: StatisticOrderComponent,
+        canActivate: [AuthGuard],
+        data: {
+          breadcrumbs: 'Statistica'
         }
       },
       {
