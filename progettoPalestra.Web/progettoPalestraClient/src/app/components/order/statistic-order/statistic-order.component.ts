@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../../services/order.service';
-import { ArticleStatisticDTO } from '../../../models/Data/article-statistic';
+import { ArticleStatisticDTO } from '../../../models/Data/article-statistic.model';
 import { CategoryDTO } from '../../../models/Data/category.model';
 
 @Component({

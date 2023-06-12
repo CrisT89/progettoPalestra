@@ -6,7 +6,7 @@ import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { DetailsOrderComponent } from '../details-order/details-order.component';
 import { Subscription } from 'rxjs';
-import { ArticleStatisticDTO } from '../../../models/Data/article-statistic';
+import { ArticleStatisticDTO } from '../../../models/Data/article-statistic.model';
 
 @Component({
   selector: 'app-list-order',

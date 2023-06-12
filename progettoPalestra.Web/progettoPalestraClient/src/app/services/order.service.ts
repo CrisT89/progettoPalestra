@@ -5,7 +5,7 @@ import { environment } from "../../environments/environment";
 import {  TestataOrdineDTO } from "../models/Data/testata-ordine.model";
 import { MailMessageDTO } from "../models/mailMessage.model";
 import { tap } from "rxjs/operators";
-import { ArticleStatisticDTO } from "../models/Data/article-statistic";
+import { ArticleStatisticDTO } from "../models/Data/article-statistic.model";
 
 @Injectable({providedIn: "root"})
 export class OrderService {

@@ -45,7 +45,7 @@ export class AddCategoryComponent implements OnInit {
   saveCategory() {
     const values: Object = this.categoryForm.value;
     /*bind the inserted values and then save them*/
-    console.log(values, "save!");
+    // console.log(values, "save!");
     this.category.Name = values['Nome'];
     this.category.Label = values['Label'];
     this.category.Description = values['Descrizione'];
@@ -56,7 +56,7 @@ export class AddCategoryComponent implements OnInit {
   modifyCategory() {
     const values: Object = this.categoryForm.value;
     /*bind the inserted values and then save them*/
-    console.log(values, "save!");
+    // console.log(values, "save!");
     this.category.Name = values['Nome'];
     this.category.Label = values['Label'];
     this.category.Description = values['Descrizione'];
