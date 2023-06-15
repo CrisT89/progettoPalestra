@@ -5,5 +5,6 @@ export class ArticleStatisticDTO {
     TotaleAcquistati: number;
     TotaleImporto: number;
     PrimoOrdine: string;
-    GiorniDaUltimoOrdine: number
+    GiorniDaUltimoOrdine: number;
+    ImportoMedioAlMese: number;
 }

@@ -24,6 +24,8 @@ export class AddArticleComponent implements OnInit {
   idParam: number;
   image: Array<IAttachmentDTO>;
 
+  imgPath: string;
+
 
   ngOnInit(): void {
     this.idParam = this.route.snapshot.params['id'];
@@ -60,9 +62,9 @@ export class AddArticleComponent implements OnInit {
         this.article.Description,
         [Validators.required,],
       ],
-      // ImagePath: [
-      //   this.article.ImagePath, []
-      // ],
+      ImagePath: [
+        this.article.ImagePath, []
+      ],
       Iva: [
         this.article.Iva, [Validators.min(0), Validators.max(100)]
       ],
@@ -79,7 +81,7 @@ export class AddArticleComponent implements OnInit {
         this.article.InEvidence, []
       ],
       Categoria: [
-        this.article.Category, []
+        this.article.Category, [Validators.required]
       ],
     });
   }
@@ -91,7 +93,7 @@ export class AddArticleComponent implements OnInit {
     this.article.Price = values['Prezzo'];
     this.article.Code = values['Codice'];
     this.article.Description = values['Descrizione'];
-    //this.article.ImagePath = values['ImagePath'];
+    this.article.ImagePath = values['ImagePath'];
     this.article.FK_Category = values['Categoria']['ID'];
     this.article.Iva = values['Iva'];
     this.article.DiscountPrice = values['PrezzoScontato'];
@@ -136,5 +138,20 @@ export class AddArticleComponent implements OnInit {
       this.article.ImagePath = event[0]['FilePath'];
     }
     console.log(event);
+  }
+
+  onFileChange(event) {
+    const reader = new FileReader();
+    const file = event.target.files[0];
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      this.imgPath = reader.result as string;
+    }
+    console.log(event.target.value);
+  }
+
+  onUpdate(event) {
+    console.log(event.target.value);
+    this.imgPath = event.target.value;
   }
 }

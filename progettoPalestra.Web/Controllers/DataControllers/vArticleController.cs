@@ -60,7 +60,8 @@ namespace progettoPalestra.Web.Controllers.DataControllers
                                      TotaleAcquistati = a.Sum(x => x.Quantity), 
                                      TotaleImporto = a.Sum(x => x.Quantity * x.UnitaryPrice),
                                      PrimoOrdine = a.Min(x => x.OrderDate).Value.ToString("d"),
-                                     GiorniDaUltimoOrdine = (today - a.Max(x => x.OrderDate)).Value.Days
+                                     GiorniDaUltimoOrdine = (today - a.Max(x => x.OrderDate)).Value.Days,
+                                     ImportoMedioAlMese = a.Sum(x => x.Quantity * x.UnitaryPrice)/(int)Math.Ceiling((today - a.Min(x => x.OrderDate)).Value.Days/30.0)
                         };
 
             List<ArticleStatisticDTO> statisticData = query.Take(numeroDiDati).ToList();

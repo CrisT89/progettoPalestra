@@ -1,3 +1,4 @@
+import { LookupDTO } from "../lookup.model";
 import { CategoryDTO } from "./category.model";
 /* 
 Modello per l'articolo
@@ -29,6 +30,7 @@ export class ArticleDTO {
     InEvidence: boolean;
 
     Category: CategoryDTO;
+    // Category: LookupDTO;
     FK_Category: number;
 
     UpdateDate: Date;

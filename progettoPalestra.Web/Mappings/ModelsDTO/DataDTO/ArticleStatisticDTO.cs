@@ -8,5 +8,6 @@
         public decimal TotaleImporto { get; set; }
         public string PrimoOrdine { get; set; }
         public int GiorniDaUltimoOrdine { get; set; }
+        public decimal ImportoMedioAlMese { get; set; }
     }
 }

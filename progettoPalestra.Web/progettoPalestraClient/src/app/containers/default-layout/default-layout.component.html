@@ -103,7 +103,7 @@
 </app-header>
 
 <!--NAVBAR/SIDEBAR VERTICALE-->
-<div class="app-body" >
+<div class="app-body custom-background" >
   <app-sidebar #appSidebar [fixed]="true" [display]="'lg'" [minimized]="sidebarMinimized"
     (minimizedChange)="toggleMinimize($event)" *ngIf="isAdmin">
     <app-sidebar-nav [navItems]="navItems" [perfectScrollbar] [disabled]="appSidebar.minimized">
@@ -117,6 +117,7 @@
     <pp-breadcrumbs></pp-breadcrumbs>
     <!-- <cui-breadcrumb></cui-breadcrumb> -->
     <!--VISUALIZZAZIONE COMPONENTI CREATI-->
+    <!-- <div class="custom-background"></div> -->
     <div class="container-fluid">
       <router-outlet></router-outlet>
     </div>

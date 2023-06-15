@@ -13,7 +13,7 @@ export class StatisticOrderComponent implements OnInit {
   constructor(private orderService:OrderService) { }
 
   statisticDataList: ArticleStatisticDTO[];
-  displayedColumns: string[] = ["ID", "Nome", "TotalImport", "Acquistati", "FirstOrder", "DaysFromLast"];
+  displayedColumns: string[] = ["ID", "Nome", "TotalImport", "Acquistati", "FirstOrder", "DaysFromLast", "ImportoMedio"];
 
   category: CategoryDTO;
   fromDate: Date = null;

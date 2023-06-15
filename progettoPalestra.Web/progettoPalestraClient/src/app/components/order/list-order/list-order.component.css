@@ -1,5 +1,6 @@
 .demo-table {
     width: 100%;
+    /* background-color: transparent; */
   }
 
 .table-container {
@@ -23,6 +24,6 @@ th.mat-header-cell, td.mat-cell {
 }
 
 .mat-row:hover .mat-cell {
-  background-color: #ddd;
+  background-color: rgba(17, 121, 249, 0.2);
 }
 

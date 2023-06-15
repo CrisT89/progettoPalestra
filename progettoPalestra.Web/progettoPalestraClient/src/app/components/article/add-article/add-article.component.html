@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-12">
                       <eqp-attachments
                         [multipleAttachment]="false"
@@ -55,16 +55,33 @@
                         (localEditedAttachments)="catchAttachmentListFunctionName($event)">
                       </eqp-attachments>
                     </div>
-                </div>
-                <div class="row" *ngIf="article.ImagePath">
-                    <div class="col-md-8">
+                </div> -->
+                <!-- UPLOAD IMMAGINE TRAMITE URL -->
+                <div class="row" >
+                    <div class="col-md-6">
                         <mat-form-field>
                             <mat-label>URL immagine</mat-label>
-                            <input type="text" matInput 
-                                placeholder="Url..." disabled [value]="article.ImagePath">
+                            <input type="text" matInput  
+                                (blur)="onUpdate($event)"
+                                placeholder="Url..."  formControlName="ImagePath">
                         </mat-form-field>
                     </div>
+                    <div class="col-md-6" *ngIf="imgPath">
+                        <img class="img-preview" [src]="imgPath" alt="preview">
+                    </div>
                 </div>
+                <!-- UPLOAD IMMAGINE DA FILE -->
+                <!-- <div class="row" >
+                    <div class="col-md-6">
+                            <mat-label>URL immagine</mat-label>
+                            <input type="file"  
+                                placeholder="Url..."  formControlName="ImagePath"
+                                (change)="onFileChange($event)">
+                    </div>
+                    <div class="col-md-6" *ngIf="imgPath">
+                        <img class="img-preview" [src]="imgPath" alt="preview">
+                    </div>
+                </div> -->
             </div>
         </mat-tab>
         <!-- other tabs -->
